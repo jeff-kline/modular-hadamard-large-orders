@@ -45,4 +45,4 @@ Theorem B were not instance-checked.
 `make paper` builds [paper/main.pdf](paper/main.pdf) in three passes with
 `SOURCE_DATE_EPOCH` fixed. Two builds give identical bytes.
 
-PDF SHA-256: `59e60e4b21bab06c917aa1817355d12ef07701e998b514b294e4ce1e24f305b7`
+PDF SHA-256: `45a9e387e31c0246b0980df1465a37b76af474886cdf0d55e5fc44c6bb123192`

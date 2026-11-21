@@ -1,8 +1,10 @@
 # Admission record
 
-**Current state:** DRAFT
+**Current state:** CANDIDATE
 
-**Version:** 0.1.0 (planned)
+**Verdict:** NOT YET ADMITTED
+
+**Version:** 0.1.0 (release candidate)
 
 **Standard:** [A Public Standard for This Work](https://jeff-kline.github.io/posts/research-program/index.html)
 
@@ -22,13 +24,15 @@ introduction on 2026-11-21.
 3. Asymptotic existence at all large orders divisible by 4 for every odd prime,
    every power of 2, and every $m$ of the form $4p^a$ or $4pq$ (Theorems C, E,
    F); every $m$ at large orders divisible by $2^{L(m)}$ (Theorem G) or
-   congruent to 0 or 4 modulo each odd prime dividing $m$ (Theorem H);
-   Kuperberg's Conjecture 5.1 for $p\not\equiv1\pmod8$ (Theorem D).
+   divisible by 4 and congruent to 0 or 4 modulo each odd prime dividing $m$
+   (Theorem H); Kuperberg's Conjecture 5.1, with 0 counted as a square, for
+   $p\not\equiv1\pmod8$ (Theorem D). New for odd primes from 13 on and for
+   powers of 2 from 128 on; smaller cases were known or announced.
 
 ## Gates
 
 | Gate | Status |
 |---|---|
-| P1 prior work | PARTIAL: the full text of Eliahou 2026 was not openly accessible; scan of 20–21 Nov 2026 must be repeated before tagging |
-| A1 consistency | open: release audits not yet run |
+| P1 prior work | PARTIAL: the full text of Eliahou 2026 was not openly accessible at the time of writing; its abstract, Eliahou 2025 and the survey's report of Eliahou's announcements are credited; scans of 20–21 Nov 2026, within 7 days of tagging |
+| A1 consistency | PASS: claims, citation and reproducibility audits of 21 Nov 2026; findings fixed and re-checked (see [audit/LEDGER.md](audit/LEDGER.md)) |
 | R1 stewardship | open: no tag, archive or DOI |

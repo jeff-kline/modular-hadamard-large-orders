@@ -10,11 +10,12 @@ claim of global priority.
 
 | Source | Content | Relation |
 |---|---|---|
-| Kuperberg, *Hadamard matrices modulo p and small modular Hadamard matrices*, J. Combin. Des. 24 (2016); arXiv 1409.0148 (read in full) | $m=7$, 11 at all sufficiently large orders; iterated direct sum (Lemmas 3.5, 4.4); Conjecture 5.1, proved for $p=3,5,7,11$ and conditionally for $p\equiv3\pmod4$ with 2 primitive | Theorem A closes $m=7$ at every order divisible by 4; Theorem D proves Conjecture 5.1 for $p\not\equiv1\pmod8$ |
+| Kuperberg, *Hadamard matrices modulo p and small modular Hadamard matrices*, J. Combin. Des. 24 (2016); arXiv 1409.0148 (read in full) | $m=7$, 11 at all sufficiently large orders; iterated direct sum (Lemmas 3.5, 4.4); Conjecture 5.1 (literally false at odd multiples of $p$; read with 0 counted as a square), recorded as known for $p=3,5,7$, proved for $p=11$, and conditionally for $p\equiv3\pmod4$ with 2 primitive | Theorem A closes $m=7$ at every order divisible by 4; Theorem D proves Conjecture 5.1 for $p\not\equiv1\pmod8$ |
 | Lee and Szőllősi, *Hadamard matrices modulo 5*, J. Combin. Des. 22 (2014); arXiv 1307.1981 (read in full) | $m=5$; direct-sum lemma; complement of a projective plane of order 9 | the lemma used throughout |
 | Egan, Kotsireas, London and Ó Catháin, arXiv 2610.27175 v2 (read) | §5.4: Problems 10 and 11; status of the conjecture | Theorem A answers Problem 11 |
 | Eliahou, *An update on modular Hadamard matrices*, J. Algebraic Combin. 64 (2026), art. 1 | abstract only: conjecture solved for $m=5,12,32$ and divisors; 64-modular at every $4\ell$ with $\ell\equiv3\pmod{16}$ or $\ell\equiv7\pmod{32}$ | **full text not openly accessible at the time of writing** (Springer bot check; HAL record without file; ACM DL 403) |
-| Eliahou, Australas. J. Combin. 93 (2025) 422–427 (read) | a 64-modular matrix of order 668 | credited |
+| Eliahou, Australas. J. Combin. 93 (2025) 422–427 (read) | a 64-modular matrix of order 668; announces 64-modular matrices at every $4\ell$ with $\ell\equiv1,3,5\pmod{16}$ or $\ell\equiv7\pmod{32}$ in a forthcoming paper | credited |
+| Survey arXiv 2610.27175 v2, §5.4, citing Eliahou (2025) and a personal communication | Eliahou "announced 64-modular Hadamard matrices at all orders $4\ell$" | credited in the paper; if so, Theorem E is new only for $2^A\ge128$ (for $A\le5$ it follows from $m=32$) |
 | Tseng, Zenodo 10.5281/zenodo.20267606 (May 2026; description read) | explicit 128- and 500-modular matrices of order 668 | credited; no overlap with the theorems |
 | Brouwer, report ZW 202/83 (1983) (read) | symmetric designs $(1+2QS_d, Q^d, Q^{d-1}(Q-1)/2)$ | used in Theorems F, H |
 | Hasani, Nellore and Ward, aiXiv 2611.02032 (Nov 2026); Alpöge, Voinov and Reynolds-Haertle, announcement (Aug 2026) | real Hadamard matrices of orders 1132, 1244 among twelve | used in Theorem B; cited neutrally |

@@ -2,10 +2,11 @@
 
 Jeffery Kline
 
-**Status: draft.** This repository is being prepared for release under the
-project's
-[public research standard](https://jeff-kline.github.io/posts/research-program/index.html).
-No version has been released and no DOI exists yet.
+**Status: release candidate for version 0.1.0.** The claims are frozen
+and audited (see [ADMISSION.md](ADMISSION.md)). There is no tag, archive or
+DOI yet, so there is no stable citation. Admission under the project's
+[public research standard](https://jeff-kline.github.io/posts/research-program/index.html)
+is a release decision, not peer review or a correctness certificate.
 
 The paper is [paper/main.pdf](paper/main.pdf); its source is
 [paper/main.tex](paper/main.tex).
@@ -22,11 +23,13 @@ $m=7$ and $m=11$ they exist in all large enough sizes.
 New in this paper: 7-modular Hadamard matrices exist in every size divisible
 by 4. This answers a question in a 2026 survey. The same holds for $m=11$
 and $m=13$. For every other $m$, the paper shows that they exist in all large
-enough sizes, though for some $m$ only when the size is divisible by a higher
-power of 2.
+enough sizes divisible by a suitable power of 2, which depends on $m$. For
+many $m$, including every prime, every power of 2 and $m=140$, divisibility
+by 4 is enough; whether it is enough for every $m$ is still open.
 
 The matrices are built by a known method: attaching a block design to a
-smaller matrix. What is new is the choice of designs.
+smaller matrix. What is new is the choice of designs and of starting
+matrices.
 
 ## What is new
 
@@ -35,7 +38,8 @@ order divisible by 4, for $m=5$, 12 and 32 and their divisors (Lee–Szőllősi;
 Marrero–Butson; Eliahou–Kervaire). Kuperberg proved the cases $m=7$ and
 $m=11$ at all sufficiently large orders. Eliahou constructed 64-modular
 matrices at every order $4\ell$ with $\ell\equiv3\pmod{16}$ or
-$\ell\equiv7\pmod{32}$. New here:
+$\ell\equiv7\pmod{32}$, and has announced them at every order divisible by 4.
+New here:
 
 1. **Principal result: 7-modular Hadamard matrices at every order divisible
    by 4** (Theorem A), answering Problem 11 of the 2026 survey. The proof uses
@@ -46,16 +50,18 @@ $\ell\equiv7\pmod{32}$. New here:
    order.
 3. **All large orders divisible by 4** for every odd prime (Theorem C), every
    power of 2 (Theorem E), and every modulus of the form $4p^a$ or $4pq$
-   (Theorem F), with effective thresholds.
+   (Theorem F), with effective thresholds. This is new for primes from 13 on
+   and for powers of 2 from 128 on; the smaller cases above were known or
+   announced.
 4. **Every modulus** at all large orders divisible by a power of 2 that depends
-   on $m$ (Theorem G), and every modulus at large orders that are 0 or 4
-   modulo each odd prime dividing $m$ (Theorem H).
+   on $m$ (Theorem G), and every modulus at large orders divisible by 4 that
+   are 0 or 4 modulo each odd prime dividing $m$ (Theorem H).
 5. **Kuperberg's Conjecture 5.1** for every prime $p\not\equiv1\pmod 8$, read
    with 0 counted as a square (Theorem D). Read literally, the conjecture
-   fails at odd multiples of $p$.
-6. **A negative remark on Problem 10:** a natural splicing gadget of order 129
-   that would settle the 128-modular case cannot exist for one of the needed
-   classes.
+   fails at odd multiples of $p$. The cases $p\le11$ were already known.
+
+The paper also records that a natural splicing gadget of order 129 for the
+128-modular case (Problem 10) cannot exist for one of the needed classes.
 
 Not new: the direct-sum lemma (Lee–Szőllősi; Kuperberg), the projective and
 Brouwer designs, Paley's matrices, and the use of
@@ -80,7 +86,8 @@ global priority.
   Hadamard matrices*: $m=7$ and $m=11$ at all sufficiently large orders, the
   iterated direct sum, and Conjecture 5.1.
 - **Eliahou (2025, 2026)**: a 64-modular matrix of order 668, and 64-modular
-  matrices in two progressions of orders.
+  matrices in two progressions of orders; further progressions announced in
+  2025, and all orders divisible by 4 announced according to the 2026 survey.
 - **Tseng (2026)**, Zenodo dataset: explicit 128- and 500-modular matrices of
   order 668.
 - **Brouwer (1983)**, *An infinite series of symmetric designs*: the designs
@@ -98,7 +105,8 @@ global priority.
 | Theorems F–H, Proposition 15 | proved on paper; audited as above; one instance check at $m=140$ |
 | Priority | bounded search; see [audit/PRIOR-ART.md](audit/PRIOR-ART.md) |
 
-The instance checks build one matrix per design type and verify
+The instance checks build one matrix for each construction listed in
+[VERIFICATION.md](VERIFICATION.md) and verify
 $HH^{\mathsf T}\equiv nI\pmod m$ exactly, each with a negative control. They
 check the splice algebra on finite instances; they do not replace the proofs.
 Brouwer's designs and the McFarland and biplane designs in Theorem B were not

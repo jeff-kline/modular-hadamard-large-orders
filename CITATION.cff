@@ -23,7 +23,8 @@ abstract: >-
   0 counted as a square, for every odd prime p not congruent to 1 mod 8. The
   proofs use the direct-sum lemma of Lee–Szőllősi and Kuperberg with
   complements of projective geometries and Brouwer's symmetric designs. The
-  repository checks one instance of each design type exactly. Novelty is
+  repository checks exact instances of several of the constructions; the
+  checks do not replace the proofs. Novelty is
   bounded to the sources searched.
 keywords:
   - Hadamard matrices
