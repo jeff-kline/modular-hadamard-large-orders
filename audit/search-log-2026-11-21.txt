@@ -1,0 +1,38 @@
+---------------------------------------------------------------------------
+NOVELTY SEARCH LOG, 21 November 2026 (conclusions of Theorems F, G, H and
+Proposition fermat). Earlier log for Theorems A--E: 20 Nov 2026 (NOVELTY.md).
+arXiv API (https://export.arxiv.org/api/query, sorted by date, max 50):
+  all:"modular Hadamard"                      -> 3: 2609.25543 (32-modular), 1409.0148 (Kuperberg), 1307.1981 (Lee-Szollosi)
+  all:"modular Hadamard matrices"             -> same 3
+  abs:"modular Hadamard" AND abs:modulus      -> 0
+  abs:"Hadamard matrices modulo"              -> 1409.0148, 1307.1981
+  all:"Hadamard" AND all:"composite modulus"  -> 0
+  abs:"m-modular" AND abs:Hadamard            -> 1409.0148
+  ti:Hadamard AND abs:modular                 -> 6, only the three above are modular Hadamard
+  abs:Hadamard AND abs:"sufficiently large" AND abs:modulo -> 1, unrelated
+  abs:"140-modular", abs:"35-modular"         -> 0, 0
+  abs:Kuperberg AND abs:Hadamard              -> 1, unrelated
+  ti:Hadamard AND cat:math.CO (newest 30, to 2611.24322 of 18 Nov 2026) -> no modular Hadamard paper except 2609.25543
+aiXiv (https://aixiv.online/api/v1/papers?q=..., limit 50; frontier endpoint):
+  positive control q=Hadamard: 2611.00465 (Mark) present -> PASS
+  q=Hadamard: no modular Hadamard paper among 50 (nearest: survey 2610.02075 = arXiv 2610.27175;
+    2611.02032, real Hadamard matrices of the twelve 2026 orders)
+  q="modular Hadamard", "modular Hadamard composite modulus", "140-modular", "35-modular",
+    "Hadamard matrices modulo", "modular Hadamard every modulus", "modular Hadamard sufficiently large"
+    -> no modular Hadamard paper
+  frontier q="modular Hadamard matrices", "m-modular Hadamard conjecture", "Hadamard matrices modulo composite"
+    -> only the survey, 2611.02032, 2611.00465 (asymptotic existence of real Hadamard matrices)
+GitHub (gh search repos / gh search code):
+  repos "modular Hadamard", "modular hadamard matrices", "hadamard modulo", "140-modular", "modular-hadamard" -> nothing relevant
+  code "modular Hadamard" -> 64- and 128-modular notes (Eliahou orders 668, 892; open-order list), unrelated
+    NTT code; no composite-modulus or asymptotic result
+  code "modular Hadamard" "sufficiently large", "modular Hadamard" composite, "7-modular Hadamard",
+    "modular Hadamard" Brouwer -> 0
+OpenAlex: works citing Kuperberg (W2963738916) -> count 4, unchanged from 20 Nov 2026.
+Web search: "modular Hadamard" every modulus all sufficiently large orders; "modular Hadamard"
+  composite modulus 140 / "35-modular" / "140-modular"; m-modular Hadamard conjecture asymptotic
+  Brouwer symmetric designs 2026 -> only Marrero-Butson, Lee-Szollosi, Kuperberg, Eliahou 2025,
+  the survey, 2609.25543; no composite-modulus asymptotic result.
+Not accessible: full text of Eliahou, J. Algebraic Combin. 64 (2026), article 1 (abstract only).
+Conclusion: no earlier statement of Theorems F--H found; bounded search, not a priority claim.
+---------------------------------------------------------------------------

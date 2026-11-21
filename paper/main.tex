@@ -1,0 +1,547 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper,margin=0.85in]{geometry}
+\input{glyphtounicode}
+\pdfgentounicode=1
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{array,flafter}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={Modular Hadamard matrices at large orders},pdfauthor={Jeffery Kline}}
+\newtheorem{theorem}{Theorem}
+\renewcommand{\thetheorem}{\Alph{theorem}}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}[lemma]{Proposition}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\emergencystretch=2em
+% Keep bullets and the section sign in the Type 1 OMS (cmsy) fonts rather than TS1 (bitmap tcrm).
+\DeclareTextSymbolDefault{\textbullet}{OMS}
+\DeclareTextSymbolDefault{\textsection}{OMS}
+
+\newcommand{\MH}{\mathrm{MH}}
+\newcommand{\tr}{^{\mathsf T}}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\PG}{\mathrm{PG}}
+
+\title{Modular Hadamard matrices at large orders}
+\author{Jeffery Kline}
+\date{November 21, 2026\\[3pt]\small Draft}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+An $m$-modular Hadamard matrix of order $n$ is an $n\times n$ matrix $H$ with entries $\pm1$ and $HH^{\mathsf T}\equiv nI \pmod m$. Problem~11 of the 2026 survey of Egan, Kotsireas, London and \'O~Cath\'ain asks whether $7$-modular Hadamard matrices exist at every order divisible by~$4$; Kuperberg's results give this for all sufficiently large orders. We show that they do, using only Hadamard matrices known before 2026. The same method gives $11$- and $13$-modular Hadamard matrices at every order divisible by $4$, each proof using one Hadamard matrix announced in 2026 at a single order. At all sufficiently large orders divisible by $4$ we obtain $m$-modular Hadamard matrices when $m$ is an odd prime, a power of $2$, or of the form $4p^a$ or $4pq$ with $p,q$ distinct odd primes, and hence for their divisors (this includes $m=140$). For every $m$ we obtain them at all large orders divisible by a fixed power of $2$ that depends on $m$. We also prove Kuperberg's Conjecture~5.1, with $0$ counted as a square, for every odd prime $p\not\equiv1\pmod 8$. Whether $m$-modular Hadamard matrices exist at all large orders divisible by $4$ remains open for general $m$. Most proofs use the direct-sum lemma of Lee--Sz\H{o}ll\H{o}si and Kuperberg; the composite-modulus results also use Kronecker products and an assembly of several modular matrices along a skew conference matrix. The contribution is the choice of designs (complements of projective geometries and Brouwer's symmetric designs) and of starting matrices.
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+Marrero and Butson~\cite{MB72,MB73} introduced $m$-modular Hadamard matrices; we write $\mathrm{MH}(n,m)$ for one of order $n$. A real Hadamard matrix of order $n$ is an $\MH(n,m)$ for every $m$, and for $n\ge3$ an $\MH(n,m)$ exists only if $\gcd(m,4)\mid n$~\cite[Lemma~2.1]{K}. The $m$-modular Hadamard conjecture asserts that an $\mathrm{MH}(n,m)$ exists at every order divisible by $4$. It holds for $m=12$~\cite{MB72,MB73}, $m=5$~\cite{LS} and $m=32$~\cite{EK01}, and hence for their divisors~\cite{EK05,E26}. The survey~\cite[\S5.4]{EKLO} poses two further cases:
+\begin{itemize}
+\item \emph{Problem 10.} Does a $128$-modular Hadamard matrix exist at every order divisible by $4$?
+\item \emph{Problem 11.} Does a $7$-modular Hadamard matrix exist at every order divisible by $4$?
+\end{itemize}
+Kuperberg~\cite{K} proved the $7$-modular conjecture for every $n\ge4.5\times10^{36}$~\cite[Theorem~4.8]{K} and the $11$-modular one for all but finitely many $n$~\cite[Corollary~5.5]{K}. The survey~\cite[\S5.4]{EKLO} describes this as settling $m=7$ and $m=11$ ``at all but finitely many orders''. Her Theorem~4.8 states the bound $4.5\times10^{36}$, which comes from the class $n\equiv26\pmod{28}$ in her Proposition~4.7; that class is not divisible by $4$. For $n\equiv0\pmod4$ her Propositions~4.3 and~4.5--4.7 give an $\MH(n,7)$ for every $n$ above about $1.1\times10^{6}$ (a figure we compute from her Propositions~4.3 and~4.7; she states no explicit number). To settle Problem~11, it therefore suffices to cover the orders below this bound in the classes $n\equiv12,24\pmod{28}$ for which no ordinary Hadamard matrix is known. For $m=11$ no bound is stated. Kuperberg also stated a conjecture for every odd prime~\cite[Conjecture~5.1]{K}:
+\begin{quote}
+\emph{Let $p$ be an odd prime. For all but finitely many $n$, an $\MH(n,p)$ exists if and only if $n$ is even or a quadratic residue of $p$.}
+\end{quote}
+Read literally, with ``quadratic residue'' meaning a nonzero square, the ``only if'' direction fails at every odd multiple $n$ of $p$, because $J$ is an $\MH(n,p)$ there~\cite[Lemma~2.3]{K}. The obstruction behind that direction, $(\det H)^2\equiv n^n$, is~\cite[Lemma~2.2]{K}, which assumes $\gcd(n,p)=1$. We therefore read the conjecture as: \emph{$n$ is even, or $n$ is a square modulo $p$, $0$ included.} Kuperberg recorded the conjecture as known for $p=3,5,7$, proved it for $p=11$~\cite[Corollary~5.5]{K}, and proved it for every prime $p\equiv3\pmod4$ of which $2$ is a primitive root, assuming her Condition~5.3, a special case of Schinzel's Hypothesis~H~\cite[Theorem~5.4]{K}. The condition is needed only for the designs of family~10 in~\cite{IT07}, used in her Theorems~5.4 and~5.6. Her Theorem~5.2 uses family~11 and is unconditional; it covers the even classes $n\equiv2(1+r)\pmod p$ with $r$ a quadratic residue, for the same primes.
+
+\paragraph{Results.}
+Theorems~\ref{thm:A} and~\ref{thm:B} are exact: they settle Problem~11 and the analogous questions for $m=11$ and $m=13$. Theorems~\ref{thm:C}--\ref{thm:E} are asymptotic results for odd primes and powers of $2$, and Theorems~\ref{thm:F}--\ref{thm:H} are asymptotic results for composite moduli.
+\begin{theorem}\label{thm:A}
+For every $n\equiv0\pmod4$ there is an $\MH(n,7)$. The proof uses only Hadamard matrices known before 2026.
+\end{theorem}
+
+\begin{theorem}\label{thm:B}
+For every $n\equiv0\pmod4$ there is an $\MH(n,11)$ and an $\MH(n,13)$. The proofs use real Hadamard matrices of orders below $1508$. Of these, only $H(1132)$ (for $m=11$) and $H(1244)$ (for $m=13$) were not known before August 2026, and each is used only at its own order. Without them the proofs give every $n\equiv0\pmod4$ except $n=1132$ for $m=11$ and $n=1244$ for $m=13$.
+\end{theorem}
+
+\begin{theorem}\label{thm:C}
+Let $p$ be an odd prime. There is an effectively computable $N(p)$ such that an $\MH(n,p)$ exists for every $n\equiv0\pmod4$ with $n\ge N(p)$. Using Linnik's theorem, $\log N(p)\le C\,p\log p$ for an absolute, effectively computable constant $C$.
+\end{theorem}
+
+\begin{theorem}\label{thm:D}
+Let $p$ be an odd prime with $p\not\equiv1\pmod8$. There is an effectively computable $N$ such that for every $n\ge N$, an $\MH(n,p)$ exists if and only if $n$ is even or $n$ is a square modulo $p$ ($0$ included). That is, Kuperberg's Conjecture~5.1 holds for $p$ in the reading above.
+\end{theorem}
+
+\begin{theorem}\label{thm:E}
+Let $A\ge1$. If $A\le3$, an $\MH(n,2^A)$ exists for every $n\equiv0\pmod4$. If $A\ge4$, there is an effectively computable $N(2^A)$ such that an $\MH(n,2^A)$ exists for every $n\equiv0\pmod4$ with $n\ge N(2^A)$. Using Linnik's theorem, $\log N(2^A)\le C\,A\,4^A$ for an absolute, effectively computable constant $C$.
+\end{theorem}
+
+For $A\ge2$, since $4=\gcd(2^A,4)$ must divide $n$ when $n\ge3$, Theorem~\ref{thm:E} says that for large $n$ an $\MH(n,2^A)$ exists if and only if $4\mid n$. For example, at $m=128$ every $n\equiv124\pmod{128}$ with $n\ge18515068$ is covered (see the remark on size in Section~\ref{sec:E}). For $m=64$, Eliahou constructs an $\MH(n,64)$ at every order $n=4\ell$ with $\ell\equiv3\pmod{16}$ or $\ell\equiv7\pmod{32}$, including $n=668$~\cite{E25} and $n=716$~\cite[abstract]{E26}. His results are exact in those two progressions; Theorem~\ref{thm:E} covers every progression, but only at large orders. Explicit $128$- and $500$-modular matrices of order $668$ were deposited by Tseng~\cite{Ts26}. Theorem~\ref{thm:E} settles none of the open orders up to $10^4$ listed in~\cite[Table~5]{EKLO} (Section~\ref{sec:E}).
+
+\begin{theorem}\label{thm:F}
+Let $p$ and $q$ be distinct odd primes and $a\ge1$. For $m=4p^a$ and for $m=4pq$ there is an effectively computable $N(m)$ such that an $\MH(n,m)$ exists for every $n\equiv0\pmod4$ with $n\ge N(m)$. In particular this holds for $m=140=4\cdot5\cdot7$, and hence for every divisor of $140$.
+\end{theorem}
+
+\begin{theorem}\label{thm:G}
+Let $m\ge2$, let $A=v_2(m)$ and let $b$ be the odd part of $m$. There are effectively computable $L(m)$ and $N(m)$ such that an $\MH(n,m)$ exists for every $n\ge N(m)$ with $2^{L(m)}\mid n$. One may take $L(m)=A+L(b)$, where $L(1)=0$ and, for $b>1$,
+\[
+L(b)=\max\Bigl(6,\ \max_{1<g\mid b}\bigl(s(g)+L(b/g)\bigr)\Bigr),
+\]
+with $s(g)$ any integer such that a Hadamard matrix of order $2^{s(g)}g$ exists; such $s(g)$ exist by Seberry's theorem~\cite{Se76}.
+\end{theorem}
+
+\begin{theorem}\label{thm:H}
+Let $m\ge2$. There is an effectively computable $N$ with the following property. Let $n\ge N$ with $n\equiv0\pmod4$, and suppose that for each odd prime $p$ dividing $m$, $n\equiv0$ or $n\equiv4\pmod p$. Then an $\MH(n,m)$ exists. The choice between $0$ and $4$ may differ from prime to prime, and nothing is assumed modulo higher powers of $p$.
+\end{theorem}
+
+Theorems~\ref{thm:F} and~\ref{thm:H} use the symmetric designs of Brouwer~\cite{Br83}. Section~\ref{sec:FGH} also extends the case $m=4p^a$ of Theorem~\ref{thm:F} to $m=2^Ap^a$ for every Fermat prime $p$, that is, every odd prime $p$ such that $p-1$ is a power of $2$ (Proposition~\ref{prop:fermat}). With $b=1$, Theorem~\ref{thm:H} gives a second proof of asymptotic existence for powers of $2$ (without the quantitative bound of Theorem~\ref{thm:E}). The proofs of Theorems~\ref{thm:F}--\ref{thm:H} do not use Theorems~\ref{thm:A}--\ref{thm:E}.
+
+\paragraph{What remains open.}
+The asymptotic $m$-modular conjecture, that an $\MH(n,m)$ exists for all large $n\equiv0\pmod4$, remains open for general $m$. A test case is $m=105$ and $n\equiv156\pmod{840}$, that is, $n\equiv51\pmod{105}$ and $n\equiv4\pmod8$. Since $51\equiv0\pmod3$, $51-1\equiv0\pmod5$ and $51-2\equiv0\pmod7$, none of the three devices of Section~\ref{sec:FGH} applies: projective steps need $c$ to be a unit, skew assembly needs $c-1$ to be a unit, and Brouwer steps need $c-2$ to be a unit, modulo every prime dividing $m$. The factorization $H_{12}\otimes\MH(n/12,35)$ is excluded by~\cite[Lemma~2.2]{K}, because $n/12$ is odd and $\equiv3\pmod5$. The routes through doubling and through $H_4\otimes\MH(n/4,105)$ both reduce, within these methods, to an $\MH(x,105)$ of odd order $x\equiv39\pmod{105}$, which these methods cannot supply. The methods listed are not exhaustive (Section~\ref{sec:remarks}).
+
+\paragraph{What is new.}
+Most constructions here iterate one lemma: the direct sum of the core of a modular Hadamard matrix with a symmetric design, due to Lee and Sz\H{o}ll\H{o}si~\cite[Lemma~3.6]{LS} and used iteratively by Kuperberg~\cite[Lemmas~3.5, 4.4]{K} (Lemma~\ref{lem:splice} below). Lee and Sz\H{o}ll\H{o}si already used the complement of a projective plane of order $9$ ($91$ points) for $m=5$. Our contribution is the choice of inputs:
+\begin{itemize}
+\item complements of the point--hyperplane designs of $\PG(d,q)$, which exist unconditionally, with $q$ and $d$ chosen so that the step $v-1$ is divisible by the modulus and the class $4q^{d-1}$ is prescribed;
+\item starting matrices that are real Hadamard matrices or Kronecker products $(J-2I)\otimes P$ with $P$ a Paley matrix;
+\item for powers of $2$, a $2$-adic choice of $(d,q)$ and an induction by doubling from $J-2I$;
+\item for composite moduli, Brouwer's symmetric designs~\cite{Br83}, whose class $2+2Q^{-1}$ reaches residues that are not units; Paley seeds with exactly two factors of $2$; and the assembly of several modular matrices along a skew conference matrix (Lemma~\ref{lem:skew}).
+\end{itemize}
+Kuperberg's Propositions~4.5--4.7 and Theorem~5.2 already use bases of the form $(J-2I)\otimes(\text{Hadamard})$ in an arithmetic progression; what changes here is the choice of the Hadamard factor (a Paley matrix chosen by the Chinese remainder theorem) and of the design. The composite-modulus results also use Kronecker products in an induction on the odd part of $m$ (Theorem~\ref{thm:G}) and an assembly of several modular matrices along a skew conference matrix (Lemma~\ref{lem:skew}). Block forms of this last kind, a core bordered by a conference matrix, are classical, and we do not claim the assembly as new.
+
+Searches on 20 and 21 November 2026 of arXiv, aiXiv, GitHub, the forward citations of~\cite{K} and~\cite{LS}, general web search, and the abstract of~\cite{E26} found no earlier proof of Theorems~\ref{thm:A}--\ref{thm:H}. The abstract of~\cite{E26} states that the conjecture is solved for $m=5,12,32$ and their divisors only. Its full text was not openly accessible at the time of writing. This is not a claim of global priority.
+
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{The direct-sum lemma}
+Multiplying rows and columns of an $\mathrm{MH}(n,m)$ by $-1$ gives an $\mathrm{MH}(n,m)$, so we may assume the first row and column consist of ones. The \emph{core} $C$ is then the matrix of order $n-1$ obtained by deleting them. Comparing the first row with the others gives $C\mathbf 1\equiv-\mathbf 1$, and comparing two other rows gives $CC^{\mathsf T}\equiv nI-J \pmod m$.
+
+\begin{lemma}[{Lee--Sz\H{o}ll\H{o}si~\cite[Lemma~3.6]{LS}; Kuperberg~\cite[Lemmas~3.5, 4.4]{K}}]\label{lem:splice}
+Let $H_1$ be an $\mathrm{MH}(n_1,m)$ with core $C$, and let $N$ be the incidence matrix of a symmetric $(v,k,\lambda)$ design. If
+\[
+v\equiv1,\qquad 2k\equiv v+1,\qquad 4(k-\lambda)\equiv n_1 \pmod m,
+\]
+then
+\[
+H=\begin{pmatrix} C & J\\ J & 2N-J\end{pmatrix}
+\]
+is an $\mathrm{MH}(n_1+v-1,m)$. Consequently an $\mathrm{MH}(n_1+j(v-1),m)$ exists for every $j\ge0$.
+\end{lemma}
+
+\begin{proof}
+Put $B=2N-J$. From $NN^{\mathsf T}=(k-\lambda)I+\lambda J$ and $NJ=JN^{\mathsf T}=kJ$ we get $BB^{\mathsf T}=4(k-\lambda)I+(v-4k+4\lambda)J$ and $JB^{\mathsf T}=(2k-v)J$. Hence, modulo $m$,
+\begin{align*}
+CC^{\mathsf T}+JJ^{\mathsf T}&\equiv n_1I+(v-1)J\equiv n_1I,\\
+CJ+JB^{\mathsf T}&\equiv(2k-v-1)J\equiv0,\\
+JJ^{\mathsf T}+BB^{\mathsf T}&\equiv 4(k-\lambda)I+(n_1-1+v-4k+4\lambda)J\equiv n_1I+(v-1)J\equiv n_1I.
+\end{align*}
+Since $v\equiv1$, the order $n=n_1+v-1$ satisfies $n\equiv n_1$, so $HH^{\mathsf T}\equiv nI$. The new matrix again has order $\equiv n_1 \pmod m$, so after normalizing it the lemma applies again with the same design.
+\end{proof}
+
+The proof uses no parity condition, no condition $\gcd(n_1,m)=1$ and no condition on $m$, so $m$ may be even and intermediate orders may be odd or $\equiv2\pmod4$. It also uses $N$ only through $B\one$ and $BB\tr$. In~\cite{LS,K} the lemma is applied through the design $(C+J)/2$, which requires $\gcd(n_1,m)=1$~\cite[Lemma~3.4]{LS}; the core form above removes that hypothesis, which Theorem~\ref{thm:E} needs. The same computation, with the diagonal of $HH\tr$ equal to $n_1-1+v$ exactly, gives the following form.
+
+\begin{lemma}\label{lem:general}
+Let $H_1$ be an $\MH(n_1,m)$ with core $C$, and let $B$ be a $v\times v$ matrix with entries $\pm1$ such that $B\one\equiv r\one$ and $BB\tr\equiv(v-\mu)I+\mu J\pmod m$. If $v\equiv1$, $r\equiv1$ and $\mu\equiv1-n_1\pmod m$, then $\left(\begin{smallmatrix}C&J\\ J&B\end{smallmatrix}\right)$ is an $\MH(n_1+v-1,m)$.
+\end{lemma}
+
+For a design, $B=2N-J$ has $r=2k-v$ and $\mu=v-4(k-\lambda)$, and Lemma~\ref{lem:general} becomes Lemma~\ref{lem:splice}. A symmetric $(v,k,\lambda)$ design satisfies $\lambda(v-1)=k(k-1)$, and its complement is a $(v,v-k,v-2k+\lambda)$ design with the same $k-\lambda$. When a design satisfies the first two conditions of Lemma~\ref{lem:splice}, we call $4(k-\lambda)\bmod m$ its \emph{class} and $v-1$ its \emph{step}; it then applies to every $n_1$ in its class.
+
+\subsection{Complements of projective spaces}
+\begin{lemma}\label{lem:PG}
+Let $q$ be a prime power, $d\ge2$, and $S=(q^d-1)/(q-1)$. The complement of the point--hyperplane design of $\PG(d,q)$ is a symmetric $(v,k,\lambda)$ design with
+\[
+v-1=qS,\qquad k=q^d,\qquad k-\lambda=q^{d-1},\qquad 2k-v-1=(q-2)S.
+\]
+If $p$ is an odd prime not dividing $q$, it satisfies the conditions of Lemma~\ref{lem:splice} modulo $p$ for some $n_1$ if and only if $p\mid S$, and then its class is $4q^{d-1}\equiv4q^{-1}\pmod p$.
+\end{lemma}
+
+\begin{proof}
+The design $\PG(d,q)$ has parameters $\bigl(\tfrac{q^{d+1}-1}{q-1},S,\tfrac{q^{d-1}-1}{q-1}\bigr)$, so $v=1+qS$, the complement has $k=v-S=q^d$, and $k-\lambda=S-\tfrac{q^{d-1}-1}{q-1}=q^{d-1}$. Then $2k-v-1=2(q-1)S-qS=(q-2)S$. Modulo $p$, $v\equiv1$ if and only if $p\mid S$; then $2k-v-1\equiv0$, and $q^d=1+(q-1)S\equiv1$ gives $4q^{d-1}\equiv4q^{-1}$.
+\end{proof}
+
+If $q$ is a power of $p$, then $S\equiv1\pmod p$ and the lemma does not apply; so $q$ is always taken prime to the modulus.
+
+\subsection{Elementary matrices and Hadamard orders}
+\begin{itemize}
+\item $J$ of order $n$ is an $\MH(n,m)$ if $m\mid n$. $J-2I$ of order $n$ is an $\MH(n,m)$ if $m\mid n-4$, since $(J-2I)^2=(n-4)J+4I$~\cite[Lemma~2.3]{K}. We write $(J-2I)_k$ for $J-2I$ of order $k$.
+\item If $X$ is an $\MH(x,m)$ and $Y$ is an $\MH(y,m)$, then $X\otimes Y$ is an $\MH(xy,m)$, since $(X\otimes Y)(X\otimes Y)\tr\equiv xI\otimes yI$; compare~\cite[Lemma~2.4]{K}. We use this with $Y$ a real Hadamard matrix $H_h$ of order $h$, and $F_2=\left(\begin{smallmatrix}1&1\\1&-1\end{smallmatrix}\right)$. \emph{Doubling} is $X\mapsto F_2\otimes X$. If $XX\tr=xI+mK$ with $K$ integral, then $(F_2\otimes X)(F_2\otimes X)\tr=2xI+2m(I\otimes K)$, so doubling takes an $\MH(x,m)$ to an $\MH(2x,2m)$.
+\item If $q\equiv3\pmod4$ is a prime power, there is a Hadamard matrix of order $q+1$ (Paley~\cite{Pa33}).
+\item Every multiple of $4$ below $2396$ is the order of a known Hadamard matrix~\cite[\S1 and Table~5]{EKLO}. Twelve of those below $2000$, listed in Section~\ref{sec:A}, were open before August 2026; matrices of these orders were announced by Alp\"oge, Voinov and Reynolds-Haertle on 12 August 2026~\cite{AVR26} and verified in~\cite[abstract and \S1]{EKLO}, and constructions of all twelve also appear in~\cite{HNW26}. We have not re-verified them.
+\item If an $\MH(n,p)$ exists with $p$ an odd prime, $n$ odd and $p\nmid n$, then $n$ is a square modulo $p$~\cite[Lemma~2.2]{K}.
+\item Dirichlet's theorem supplies primes in every reduced residue class. For the size bounds in Theorems~\ref{thm:C} and~\ref{thm:E} we use Linnik's theorem~\cite{Li44}: the least prime $\equiv b\pmod k$, $\gcd(b,k)=1$, is at most $c_1k^{c_2}$ for absolute, effectively computable constants $c_1,c_2$.
+\end{itemize}
+For an odd prime $p$ and a residue $c$ we write $T_c=\{n: 4\mid n,\ n\equiv c\pmod p\}$, and call $c$ the \emph{class} of $n\in T_c$.
+
+\section{Proof of Theorem~\ref{thm:A}}\label{sec:A}
+For $m=7$ the conditions say $v\equiv1$, $k\equiv1$ and $4(k-\lambda)\equiv n_1 \pmod 7$; this is the form in~\cite[Lemma~4.4]{K}. We use the complements of two point--hyperplane designs. The design of points and hyperplanes of $PG(d,q)$ has parameters $\bigl(\tfrac{q^{d+1}-1}{q-1},\tfrac{q^d-1}{q-1},\tfrac{q^{d-1}-1}{q-1}\bigr)$, and its complement has $k-\lambda=q^{d-1}$.
+\begin{itemize}
+\item $D_{13}$, the complement of $PG(2,13)$: $(183,169,156)$. Here $183=7\cdot26+1$, $2\cdot169-184=154=7\cdot22$ and $4\cdot13=52\equiv3$. It applies when $n_1\equiv3\pmod7$, with step $v-1=182$.
+\item $D_{3}$, the complement of $PG(6,3)$: $(1093,729,486)$. Here $1093=7\cdot156+1$, $1458-1094=364=7\cdot52$ and $4\cdot243=972\equiv6$. It applies when $n_1\equiv6\pmod7$, with step $1092=39\cdot28$.
+\end{itemize}
+
+A real Hadamard matrix of order $n$ is an $\mathrm{MH}(n,m)$ for every $m$. Before August 2026 the multiples of $4$ below $2000$ without a known Hadamard matrix were exactly $668$, $716$, $892$, $1132$, $1244$, $1388$, $1436$, $1676$, $1772$, $1916$, $1948$ and $1964$~\cite[\S1]{EKLO}. Every real Hadamard matrix used below has an order below $1092$ different from $668$, $716$ and $892$, so all of them were known before 2026, since, by~\cite[\S4 and Table~4]{EKLO}, every other order below $2000$ comes from a classical family or from the sporadic matrices of orders $764$, $956$ and $1004$, published in 1994--2014. Let $n=4t$ and split by $n \bmod 7$.
+
+\begin{itemize}
+\item $n\equiv0$: $J$, since $JJ^{\mathsf T}=nJ\equiv0$.
+\item $n\equiv4$: $J-2I$, since $(J-2I)^2=(n-4)J+4I\equiv4I$~\cite[Lemma~2.3]{K}.
+\item $n\equiv1$: then $n/2\equiv4$, so $J-2I$ of order $n/2$ is an $\mathrm{MH}(n/2,7)$; its Kronecker product with a Hadamard matrix of order $2$ is an $\mathrm{MH}(n,7)$.
+\item $n\equiv2$: then $n/4\equiv4$; use $J-2I$ of order $n/4$ and a Hadamard matrix of order $4$.
+\item $n\equiv3$: then $n\equiv24\pmod{28}$. Write $n=n_1+364i$ with $n_1\in\{24,52,\dots,360\}$, take a real Hadamard matrix of order $n_1$, and apply Lemma~\ref{lem:splice} with $D_{13}$ twice per unit of $i$. The intermediate orders $n_1+182(2i'+1)$, $0\le i'<i$, are $\equiv2\pmod4$; the lemma does not need $4\mid n$.
+\item $n\equiv6$: then $n\equiv20\pmod{28}$. Write $n=n_1+1092i$ with $n_1\in\{20,48,\dots,1084\}$, take a real Hadamard matrix of order $n_1$, and apply Lemma~\ref{lem:splice} with $D_3$ $i$ times. None of $668$, $716$, $892$ is $\equiv20\pmod{28}$.
+\item $n\equiv5$: then $n\equiv12\pmod{28}$. If $n\le768$, take a real Hadamard matrix; none of $668,716$ is $\equiv12\pmod{28}$. If $n\ge796$, then $n/2\equiv6\pmod{14}$ and $n/2\ge398$, so Kuperberg's Proposition~4.5~\cite{K} gives an $\mathrm{MH}(n/2,7)$, which uses a symmetric $(71,15,3)$ design~\cite{G00,R01}. The doubling $\left(\begin{smallmatrix}M&M\\ M&-M\end{smallmatrix}\right)$ of an $\mathrm{MH}(n/2,7)$ is an $\mathrm{MH}(n,7)$.
+\end{itemize}
+The residues $0,\dots,6$ are all covered, which proves the theorem. \qed
+
+\section{Proof of Theorem~\ref{thm:B}}\label{sec:B}
+
+\subsection{Method}
+\begin{lemma}[base rule]\label{lem:base}
+Let $p$ be an odd prime and $c\not\equiv0\pmod p$. Let $D$ be a design of class $c$ and step $a$ modulo $p$, and put $M=\operatorname{lcm}(a,4)$. If an $\MH(n',p)$ exists for every $n'\in T_c$ with $n'<M$, then an $\MH(n,p)$ exists for every $n\in T_c$.
+\end{lemma}
+
+\begin{proof}
+Let $n\in T_c$ and $n_1=n\bmod M$. Since $p\mid a\mid M$ and $4\mid M$, $n_1\equiv n$ modulo $p$ and modulo $4$; as $c\not\equiv0$, $n_1\ne0$, so $n_1\in T_c$. Apply Lemma~\ref{lem:splice} $(n-n_1)/a$ times to an $\MH(n_1,p)$.
+\end{proof}
+
+In the tables, $H_h$ is a real Hadamard matrix of order $h$, ``bases'' lists the orders below $M$ at which a real Hadamard matrix is used, and ``checks'' lists, in order, $v-1$, $k-1$, $4(k-\lambda)$, $2k-v-1$, and the identity $\lambda(v-1)=k(k-1)$. The designs exist as follows.
+\begin{itemize}
+\item $(23,12,6)$ and $(27,14,7)$: complements of the Hadamard designs $(23,11,5)$ and $(27,13,6)$ obtained from Paley matrices of orders $24$ and $28$~\cite{Pa33}.
+\item $(45,12,3)$, $(441,56,7)$ and $(378,117,36)$: McFarland designs~\cite{McF73} with $(q,d)=(3,1)$, $(7,1)$, $(3,2)$, of parameters $\bigl(q^{d+1}(1+r),\,q^dr,\,q^d\tfrac{q^d-1}{q-1}\bigr)$ with $r=\tfrac{q^{d+1}-1}{q-1}$. The triplane $(45,12,3)$ is also listed in~\cite{R01}.
+\item $(40,27,18)$, $(364,243,162)$, $(651,625,600)$, $(781,625,500)$, $(1057,1024,992)$: complements of $\PG(3,3)$, $\PG(5,3)$, $\PG(2,25)$, $\PG(4,5)$, $\PG(2,32)$ (Lemma~\ref{lem:PG}).
+\item $(56,45,36)$ and $(79,66,55)$: complements of the biplanes $(56,11,2)$ (there are exactly five~\cite{KO08}) and $(79,13,2)$ (Aschbacher's biplane~\cite{As71}; see~\cite{ADP20}).
+\item $(144,78,42)$ and its complement $(144,66,30)$. Let $R_{36}=J-2N_{36}$, with $N_{36}$ the incidence matrix of a Menon $(36,15,6)$ design~\cite{Me62,IT07}; then $R_{36}R_{36}\tr=36I$ with row sums $6$. So $R_{144}=(J-2I)_4\otimes R_{36}$ satisfies $R_{144}R_{144}\tr=144I$ with row sums $12$, and $(J+R_{144})/2$ is the incidence matrix of a $(144,78,42)$ design.
+\end{itemize}
+
+\subsection{\texorpdfstring{$m=11$}{m = 11}}
+Inverses modulo $11$: $2^{-1}=6$, $4^{-1}=3$, $8^{-1}=7$. The quadratic residues are $1,3,4,5,9$.
+
+\begin{table}[t]
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\caption{Every $n\equiv0\pmod 4$, $m=11$. The column ``$a;\,M$'' gives the step and $\operatorname{lcm}(a,4)$.}\label{tab:11}
+\begin{tabular}{@{}>{\raggedright}p{1.6cm}>{\raggedright}p{3.6cm}>{\raggedright}p{6.1cm}>{\raggedright}p{1.45cm}>{\raggedright\arraybackslash}p{2.75cm}@{}}
+$c$ & construction & checks modulo $11$ & $a;\,M$ & bases\\ \hline
+$0$ & $J$ & -- & -- & --\\
+$4$ & $J-2I$ & -- & -- & --\\
+$5$ & $(J-2I)_{n/4}\otimes H_4$ & $n/4\equiv5\cdot3\equiv4$ & -- & --\\
+$8$ & $(J-2I)_{n/2}\otimes F_2$ & $n/2\equiv8\cdot6\equiv4$ & -- & --\\
+$1$ & $(144,78,42)$ & $143=13\cdot11$; $77=7\cdot11$; $144\equiv1$; $11$; $42\cdot143=6006=78\cdot77$ & $143;\,572$ & $T_1$ below $572$\\
+$2$ & $(23,12,6)$ & $22$; $11$; $24\equiv2$; $0$; $6\cdot22=132=12\cdot11$ & $22;\,44$ & $24$\\
+$3$ & McFarland $(45,12,3)$ & $44$; $11$; $36\equiv3$; $-22$; $3\cdot44=132=12\cdot11$ & $44;\,44$ & $36$\\
+$7$ & $\PG(2,32)^c=(1057,1024,992)$ & $1056=96\cdot11$; $1023=93\cdot11$; $128\equiv7$; $990=90\cdot11$; $992\cdot1056=1047552=1024\cdot1023$ & $1056;\,1056$ & $T_7$ below $1056$\\
+$9$ & McFarland $(441,56,7)$ & $440=40\cdot11$; $55$; $196\equiv9$; $-330$; $7\cdot440=3080=56\cdot55$ & $440;\,440$ & $T_9$ below $440$\\
+$6$, $8\mid n$ & $F_2\otimes\MH(n/2,11)$, $n/2\in T_3$ & $n/2\equiv6\cdot6\equiv3$ & -- & via $c=3$\\
+$6$, $n\equiv4\ (8)$ & $F_2\otimes\MH(n/2,11)$; $(56,45,36)$ twice, then $(45,12,3)$ & $(56,45,36)$: $55$; $44$; $36\equiv3$; $33$; $36\cdot55=1980=45\cdot44$ & $55$, $44$ & $36$; and $n=28,116,204$\\
+$10$, $8\mid n$ & $(J-2I)_{n/8}\otimes H_8$ & $n/8\equiv10\cdot7\equiv4$ & -- & --\\
+$10$, $n\equiv4\ (8)$ & $F_2\otimes\MH(n/2,11)$; $\PG(5,3)^c=(364,243,162)$ & $363=3\cdot11^2$; $242=22\cdot11$; $324\equiv5$; $121$; $162\cdot363=58806=243\cdot242$ & $363;\,1452$ & $n<1452$, $n\equiv76\ (88)$\\
+\end{tabular}
+\end{table}
+
+\emph{Class $6$, $n\equiv4\pmod8$.} Put $m'=n/2$; then $m'\equiv2\pmod4$ and $m'\equiv3\pmod{11}$, that is, $m'\equiv14\pmod{44}$. An odd $\MH(n/4,11)$ cannot exist, since $n/4\equiv6\cdot3\equiv7$ is not a square modulo $11$. Two splices with $(56,45,36)$ take $H_{36}$ to an $\MH(146,11)$, and $146\equiv14\pmod{44}$. Splices with $(45,12,3)$ (step $44$) then give every $m'\equiv14\pmod{44}$ with $m'\ge146$. The remaining $m'\in\{14,58,102\}$ give $n\in\{28,116,204\}$, which are Hadamard orders. Doubling gives $\MH(n,11)$.
+
+\emph{Class $10$, $n\equiv4\pmod8$.} Put $m'=n/2$; then $m'\equiv2\pmod4$ and $m'\equiv10\cdot6\equiv5\pmod{11}$. The step $363$ is $\equiv3\pmod4$, and $726=2\cdot363=66\cdot11\equiv2\pmod4$. If $m'>726$, let $n_1=(m'-726)\bmod1452$. Then $n_1\in T_5$, an $\MH(n_1,11)$ comes from the class-$5$ row, and $m'=n_1+363(2+4j)$ for some $j\ge0$. If $m'<726$, then $n<1452$ and $n\equiv76\pmod{88}$, and we use a real Hadamard matrix of order $n$. Doubling gives $\MH(n,11)$ in the first case.
+
+The rows cover all eleven residues, and classes $6$ and $10$ are split by $n\bmod8$.
+
+\subsection{\texorpdfstring{$m=13$}{m = 13}}
+Inverses modulo $13$: $2^{-1}=7$, $4^{-1}=10$, $8^{-1}=5$. The quadratic residues are $1,3,4,9,10,12$.
+
+\begin{table}[t]
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\caption{Every $n\equiv0\pmod 4$, $m=13$.}\label{tab:13}
+\begin{tabular}{@{}>{\raggedright}p{1.6cm}>{\raggedright}p{3.6cm}>{\raggedright}p{6.1cm}>{\raggedright}p{1.45cm}>{\raggedright\arraybackslash}p{2.75cm}@{}}
+$c$ & construction & checks modulo $13$ & $a;\,M$ & bases\\ \hline
+$0$ & $J$ & -- & -- & --\\
+$4$ & $J-2I$ & -- & -- & --\\
+$3$ & $(J-2I)_{n/4}\otimes H_4$ & $n/4\equiv3\cdot10\equiv4$ & -- & --\\
+$8$ & $(J-2I)_{n/2}\otimes F_2$ & $n/2\equiv8\cdot7\equiv4$ & -- & --\\
+$1$ & $(144,66,30)$ & $143=11\cdot13$; $65=5\cdot13$; $144\equiv1$; $-13$; $30\cdot143=4290=66\cdot65$ & $143;\,572$ & $T_1$ below $572$\\
+$2$ & $(27,14,7)$ & $26$; $13$; $28\equiv2$; $0$; $7\cdot26=182=14\cdot13$ & $26;\,52$ & $28$\\
+$5$ & $(79,66,55)$ & $78=6\cdot13$; $65$; $44\equiv5$; $52$; $55\cdot78=4290=66\cdot65$ & $78;\,156$ & $44$, $96$, $148$\\
+$6$ & $\PG(4,5)^c=(781,625,500)$ & $780=60\cdot13$; $624=48\cdot13$; $500\equiv6$; $468=36\cdot13$; $500\cdot780=390000=625\cdot624$ & $780;\,780$ & $T_6$ below $780$\\
+$10$ & $\PG(3,3)^c=(40,27,18)$ & $39$; $26$; $36\equiv10$; $13$; $18\cdot39=702=27\cdot26$ & $39;\,156$ & $36$, $88$, $140$\\
+$12$ & $(378,261,180)$, complement of McFarland $(378,117,36)$ & $377=29\cdot13$; $260=20\cdot13$; $324\equiv12$; $143=11\cdot13$; $180\cdot377=67860=261\cdot260$ & $377;\,1508$ & $T_{12}$ below $1508$\\
+$9$ & $\PG(2,25)^c=(651,625,600)$; see text & $650=50\cdot13$; $624$; $100\equiv9$; $598=46\cdot13$; $600\cdot650=390000=625\cdot624$ & $650$ & $n<1300$, $n\equiv100\ (104)$\\
+$7$, $8\mid n$ & $F_2\otimes\MH(n/2,13)$, $n/2\in T_{10}$ & $n/2\equiv7\cdot7\equiv10$ & -- & via $c=10$\\
+$7$, $n\equiv4\ (8)$ & $F_2\otimes\MH(n/2,13)$; $\PG(3,3)^c$ & $n/2\equiv10$ & $39$ & $n=20,124$\\
+$11$, $8\mid n$ & $F_2\otimes\MH(n/2,13)$, $n/2\in T_{12}$ & $n/2\equiv11\cdot7\equiv12$ & -- & via $c=12$\\
+$11$, $n\equiv4\ (8)$ & $F_2\otimes\MH(n/2,13)$; $(378,261,180)$ & $n/2\equiv12$ & $377$ & $n<1508$, $n\equiv76\ (104)$\\
+\end{tabular}
+\end{table}
+
+\emph{Class $9$.} If $8\mid n$, then $n/2\equiv9\cdot7\equiv11\pmod{13}$ and $4\mid n/2$, so $n/2\in T_{11}$; we take the $\MH(n/2,13)$ from the class-$11$ rows and double it. If $n\equiv4\pmod8$ and $n<1300$, then $n\equiv100\pmod{104}$ and we use a real Hadamard matrix of order $n$. If $n\equiv4\pmod8$ and $n>1300$, then $n-1300$ is a positive element of $T_9$ divisible by $8$, so an $\MH(n-1300,13)$ exists by the first case, and two splices with $\PG(2,25)^c$ (step $650$) give an $\MH(n,13)$.
+
+\emph{Class $7$, $n\equiv4\pmod8$.} Put $m'=n/2\equiv2\pmod4$, $m'\equiv10\pmod{13}$. The step $39$ is $\equiv3\pmod4$ and $78=6\cdot13$. If $m'>78$, let $n_1=(m'-78)\bmod156\in T_{10}$; then $m'=n_1+39(2+4j)$. The remaining $m'\in\{10,62\}$ give $n\in\{20,124\}$, Hadamard orders. Double.
+
+\emph{Class $11$, $n\equiv4\pmod8$.} Put $m'=n/2\equiv2\pmod4$, $m'\equiv12\pmod{13}$. The step $377$ is $\equiv1\pmod4$ and $754=2\cdot377=58\cdot13$. If $m'>754$, let $n_1=(m'-754)\bmod1508\in T_{12}$; then $m'=n_1+377(2+4j)$. If $m'<754$, then $n<1508$, $n\equiv76\pmod{104}$, and we use a real Hadamard matrix of order $n$. Double in the first case.
+
+The rows cover all thirteen residues; classes $7$, $9$ and $11$ are split by $n\bmod8$.
+
+\subsection{Small orders}
+For $n\le64$ every case is $J$, $J-2I$, a Kronecker product, or a real Hadamard matrix of order $n$ or $n/2$. The first multiples of $4$ reached by a splice are $68=24+2\cdot22$ for $m=11$ and $80=28+2\cdot26$ for $m=13$. The odd steps $143$, $55$, $363$ (for $m=11$) and $143$, $39$, $377$ (for $m=13$) create odd intermediate orders only in the classes $1,3,5$ modulo $11$ and $1,10,12$ modulo $13$. These are quadratic residues, as~\cite[Lemma~2.2]{K} requires.
+
+\subsection{The 2026 matrices}
+All real Hadamard matrices in Tables~\ref{tab:11} and~\ref{tab:13} have orders below $1508$. The orders below $1508$ not known before August 2026 are $668$, $716$, $892$, $1132$, $1244$, $1388$ and $1436$. Their residues are $8,1,1,10,1,2,6$ modulo $11$ and $5,1,8,1,9,10,6$ modulo $13$.
+\begin{itemize}
+\item For $m=11$, only $1132=76+12\cdot88$ occurs as a base. It occurs in class $10$ with $n\equiv4\pmod8$ and $m'=566<726$, where the base is $H_n$ itself; so $H(1132)$ is used only at $n=1132$.
+\item For $m=13$, only $1244=100+11\cdot104$ occurs as a base. It occurs in class $9$ with $n\equiv4\pmod8$ and $n<1300$; so $H(1244)$ is used only at $n=1244$.
+\end{itemize}
+Comparing these residues with the base sets in the tables shows that no other base is a 2026 order. This proves Theorem~\ref{thm:B}.
+
+We could not remove either dependence with the designs we know. Consider $1132=4\cdot283$. An $\MH(283,11)$ does not exist, because $283$ is odd and $283\equiv8$ is not a square modulo $11$. So within the constructions of this paper one needs an $\MH(566,11)$: class $5$, at an order $\equiv2\pmod4$, hence a class-$5$ gadget with step $\equiv2\pmod4$. A symmetric $(463,154,51)$ design would give one. Its complement $(463,309,206)$ has $v-1=462=42\cdot11$, $k-1=308=28\cdot11$, $4(k-\lambda)=412\equiv5$ and $2k-v-1=154$. Then $566=104+462$, with $104\in T_5$. The parameters satisfy $\lambda(v-1)=k(k-1)=23562$ and the Bruck--Ryser--Chowla condition ($19^2=103\cdot2^2-51\cdot1^2$), but we do not know whether such a design exists.
+For $n=1244$ we found no class-$9$ substitute among projective, McFarland, Spence, Hadamard, Menon and biquadratic-residue designs, nor among the $(71,15,3)$ designs.
+
+\section{Proofs of Theorems~\ref{thm:C} and~\ref{thm:D}}\label{sec:CD}
+Throughout, $p$ is an odd prime. For $c\not\equiv0,4\pmod p$ put $u_c=4c^{-1}\bmod p$ and $e_c=\ord_p(u_c)$. Since $u_c\notin\{0,1\}$, $e_c\ge2$.
+
+\begin{lemma}[a gadget for each class]\label{lem:classgadget}
+Let $c\not\equiv0,4\pmod p$ and let $q$ be a prime power with $q\equiv u_c\pmod p$. The complement of $\PG(e_c,q)$ is a design of class $c$ modulo $p$. Its step $a=q(q^{e_c}-1)/(q-1)$ is divisible by $p$. If moreover $q\equiv1\pmod4$, then $a$ is odd when $e_c$ is odd, and $v_2(a)=v_2(e_c)$ when $e_c$ is even.
+\end{lemma}
+
+\begin{proof}
+Write $e=e_c$ and $S=(q^e-1)/(q-1)$. Since $q^e\equiv1$ and $q-1\not\equiv0$, $p\mid S$. Lemma~\ref{lem:PG} gives class $4q^{-1}\equiv4u_c^{-1}=c$. If $q$ is odd, $S=\sum_{i<e}q^i\equiv e\pmod2$. For odd $e$, $S$ and $a=qS$ are odd. For even $e$, the lifting-the-exponent lemma gives $v_2(q^e-1)=v_2(q-1)+v_2(q+1)+v_2(e)-1$, so $v_2(a)=v_2(S)=v_2(q+1)+v_2(e)-1=v_2(e)$ when $q\equiv1\pmod4$.
+\end{proof}
+
+By Dirichlet's theorem there is a prime $q\equiv u_c\pmod p$, and also one with $q\equiv u_c\pmod p$ and $q\equiv1\pmod4$.
+
+\begin{proposition}\label{prop:base}
+Let $c\not\equiv0,4\pmod p$, and let $D$ be a design of class $c$ modulo $p$ with step $a=p^\beta2^\alpha L$, where $\beta\ge1$ and $\gcd(L,2p)=1$. Let $h$ be the order of a real Hadamard matrix with $h\equiv4\pmod8$, $h\equiv c/4\pmod p$ and $\gcd(h,L)=1$. Then an $\MH(n,p)$ exists for every $n\equiv c\pmod p$ with $2^{\min(\alpha,2)}\mid n$ and $n\ge h(a+4)$. Such an $h$ exists: $h=q'+1$ for a prime $q'$ with $q'\equiv3\pmod8$, $q'\equiv c/4-1\pmod p$ and $q'\equiv1\pmod\ell$ for every prime $\ell\mid L$.
+\end{proposition}
+
+\begin{proof}
+Let $P$ be a Hadamard matrix of order $h$. For $t\ge0$, $(J-2I)_{4+pt}$ is an $\MH(4+pt,p)$, so $B_t=(J-2I)_{4+pt}\otimes P$ is an $\MH(n_t,p)$ with $n_t=h(4+pt)$. Put $T=p^{\beta-1}2^{\max(\alpha-2,0)}L$, and choose $t$ with $0\le t<T$ by the Chinese remainder theorem so that:
+\begin{enumerate}
+\item[(i)] $h(4+pt)\equiv n\pmod{p^\beta}$. This is $pt\equiv nh^{-1}-4\pmod{p^\beta}$, and $nh^{-1}-4\equiv c(c/4)^{-1}-4=0\pmod p$, so $t$ is determined modulo $p^{\beta-1}$.
+\item[(ii)] If $\alpha\ge3$: write $h=4h_o$ with $h_o$ odd, and require $h_o(4+pt)\equiv n/4\pmod{2^{\alpha-2}}$. This determines $t$ modulo $2^{\alpha-2}$.
+\item[(iii)] $4+pt\equiv nh^{-1}\pmod L$. Here $p$ and $h$ are units modulo $L$.
+\end{enumerate}
+Then $n_t\equiv n$ modulo $p^\beta$ and $L$. Modulo $2^\alpha$: if $\alpha\le2$, both $n$ and $n_t$ are divisible by $2^\alpha$, and if $\alpha\ge3$ this is (ii). So $a\mid n-n_t$. Since $pT\le a$, $n_t<h(4+pT)\le h(4+a)\le n$. Apply Lemma~\ref{lem:splice} with $D$, $(n-n_t)/a$ times, to $B_t$.
+
+For the existence of $h$: the residues $3\pmod8$, $c/4-1\pmod p$ (nonzero since $c\not\equiv4$) and $1\pmod\ell$ are units, and the moduli are pairwise coprime, so Dirichlet's theorem gives $q'$. Since $q'\equiv3\pmod4$, Paley's construction gives a Hadamard matrix of order $h=q'+1$. Then $h\equiv4\pmod8$, $h\equiv c/4\pmod p$, and $h\equiv2\pmod\ell$ is a unit.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:C}]
+For $c\equiv0$ and $c\equiv4$, $J$ and $J-2I$ give every $n\in T_c$. For any other class $c$, take $D$ from Lemma~\ref{lem:classgadget} with a prime $q_c$, and $h_c$ from Proposition~\ref{prop:base}; since $4\mid n$, the divisibility condition holds. So $N(p)=\max_ch_c(a_c+4)$ works, and it is computable once $q_c$ and $q_c'$ are taken least. For the size: $a_c<2q_c^{e_c}\le2q_c^{p-1}$, and Linnik's theorem gives $q_c\le c_1p^{c_2}$, so $\log a_c=O(p\log p)$. The prime $q_c'$ lies in a progression modulo $8p\operatorname{rad}(L_c)\le8pa_c$, so $\log h_c=O(\log(pa_c))=O(p\log p)$. Hence $\log N(p)\le C\,p\log p$.
+\end{proof}
+
+This bound is an upper bound only. Whenever $u_c$ is a primitive root modulo $p$, which happens for some class $c$ for every $p$, the step of the gadget of Lemma~\ref{lem:classgadget} exceeds $q_c^{p-1}$.
+
+\begin{remark}
+Any real Hadamard order $h$ with the properties in Proposition~\ref{prop:base} serves as the base factor. A power of $2$ satisfies $h\equiv4\pmod8$ only for $h=4$. With $h=2^i$, $i\ge3$, and $\alpha\ge3$, condition~(ii) fails for $n$ with $v_2(n)=2$. Kuperberg's bases $(J-2I)\otimes F_{2^i}$ in~\cite[Theorem~5.2]{K} reach the other classes modulo $2^ip$ by adding designs of size $\equiv3\pmod4$, and her hypothesis that $2$ is a primitive root enters through the requirement $2^{i+2}\equiv n_0\pmod p$.
+\end{remark}
+
+\begin{proof}[Proof of Theorem~\ref{thm:D}]
+Let $G=(\mathbb Z/p)^\times$, let $Q\subseteq G$ be the subgroup of squares, let $2^s\parallel p-1$, and let $O$ be the subgroup of elements of odd order. Then $O\subseteq Q$ and $G/O$ is cyclic of order $2^s$. Let $\Omega$ be the set of $w\in G$ such that an $\MH(x,p)$ exists for every sufficiently large odd $x\equiv w\pmod p$.
+
+\emph{Step 1 (one gadget, both parities).} Let $c\not\equiv0,4$. Take $D$ from Lemma~\ref{lem:classgadget} with a prime $q\equiv u_c\pmod p$, $q\equiv1\pmod4$, and let $\alpha=v_2(a)$. If $v_2(e_c)\le1$, then $\alpha\le1$, and Proposition~\ref{prop:base} gives an $\MH(n,p)$ for all large even $n\equiv c$. If $e_c$ is odd, then $\alpha=0$, and it gives all large $n\equiv c$ of either parity; in particular $c\in\Omega$.
+
+\emph{Step 2 ($\Omega$ is closed under multiplication by $4$).} Let $w\in\Omega$. If $4w=4$, then $J-2I$ shows $4w\in\Omega$. Otherwise $c=4w\not\equiv0,4$. Take the design $D$ of Lemma~\ref{lem:classgadget} for $c$, with step $a=p^\beta2^\alpha L$. Since $w\in\Omega$ and $2$, $p$, $L$ are pairwise coprime, we can fix an odd $x\equiv w\pmod p$ with $x\equiv1\pmod L$ for which an $\MH(x,p)$, $X$, exists. Then $X\otimes(J-2I)_{4+pt}$ is an $\MH(x(4+pt),p)$ of class $4w=c$, of odd order when $t$ is odd. Let $n\equiv c$ be odd, put $\alpha'=\max(\alpha,1)$, and choose $0\le t<p^{\beta-1}2^{\alpha'}L$ with $4+pt\equiv nx^{-1}$ modulo $p^\beta$ (the right side is $\equiv4\pmod p$), modulo $L$, and modulo $2^{\alpha'}$. The last congruence forces $t$ odd. Then $x(4+pt)\equiv n\pmod a$ and $x(4+pt)<x(4+2a)$. So for $n\ge x(4+2a)$, splicing $D$ gives an $\MH(n,p)$, and $4w\in\Omega$.
+
+\emph{Step 3 (odd orders).} By~\cite[Lemma~2.2]{K}, $\Omega\subseteq Q$. By Step~1 and $J-2I$, $4O\subseteq\Omega$: if $c\in4O$, $c\ne4$, then $u_c\in O$, so $e_c$ is odd. By Step~2, $4^kO\subseteq\Omega$ for every $k\ge1$, so $\langle4\rangle O\subseteq\Omega$. If $p\equiv3\pmod4$, then $s=1$ and $O=Q$. If $p\equiv5\pmod8$, then $s=2$ and $2\notin Q$, so the image of $2$ generates $G/O\cong\mathbb Z/4$, the image of $4$ has order $2$, and $\langle4\rangle O=Q$. In both cases $\Omega=Q$.
+
+\emph{Step 4 (even orders).} Let $n$ be even with class $c$. If $c\equiv0$ or $4$, use $J$ or $J-2I$. Otherwise, if $v_2(e_c)\le1$, use Step~1. Since $e_c\mid p-1$, this covers every class when $p\equiv3\pmod4$. If $p\equiv5\pmod8$ and $v_2(e_c)=2$, then $e_c\nmid(p-1)/2$, so $u_c$ is not a square, and neither is $c=4u_c^{-1}$. If $4\mid n$, use Theorem~\ref{thm:C}. If $n\equiv2\pmod4$, then $n/2$ is odd and $n/2\equiv c/2$, which is a square because $c$ and $2$ are non-squares. So $c/2\in\Omega$, an $\MH(n/2,p)$ exists for large $n$, and doubling gives an $\MH(n,p)$.
+
+\emph{Assembly.} For large odd $n$: if $p\mid n$, $J$ exists; if $n$ is a nonzero square, Step~3 applies; otherwise no $\MH(n,p)$ exists by~\cite[Lemma~2.2]{K}. Large even $n$ are covered by Step~4. There are finitely many classes, each with an effective threshold, which proves the theorem.
+\end{proof}
+
+\begin{remark}
+For $p=5$ the theorem says that for large $n$ an $\MH(n,5)$ exists unless $n$ is odd and $n\equiv2,3\pmod5$, that is, unless $n\equiv3,7\pmod{10}$. This agrees with Lee--Sz\H{o}ll\H{o}si~\cite[Theorem~3.10]{LS}, whose $(91,81,72)$ design, the complement of a projective plane of order $9$, has the parameters of the class-$1$ gadget of Lemma~\ref{lem:classgadget} with $q=9$ (for instance $\PG(2,9)^c$). For $p=3$ it agrees with~\cite[Theorem~2.5(b)]{K}.
+\end{remark}
+
+\section{Proof of Theorem~\ref{thm:E}}\label{sec:E}
+For $A\le3$, $J$ (when $8\mid n$) and $J-2I$ (when $n\equiv4\pmod 8$) are $\MH(n,2^A)$ for every $n\equiv0\pmod4$; see~\cite[Theorem~2.5]{K}. From now on $A\ge4$. We write $n\equiv4\pmod 8$ as $n\equiv 4L\pmod{2^A}$ with $L$ odd, determined modulo $2^{A-2}$.
+
+\begin{lemma}\label{lem:2adic}
+Let $q$ be an odd prime power, $d\ge2$, $S=(q^d-1)/(q-1)$, and suppose $v_2(S)\ge A$. Then the complement of $\PG(d,q)$ satisfies the conditions of Lemma~\ref{lem:splice} modulo $2^A$ for every $n_1\equiv4L\pmod{2^A}$ with $L\equiv q^{-1}\pmod{2^{A-2}}$. Moreover $S\equiv d\pmod2$, and for even $d$, $v_2(S)=v_2(q+1)+v_2(d)-1$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:PG}, $v-1=qS\equiv0$ and $2k-v-1=(q-2)S\equiv0\pmod{2^A}$. The class is $4q^{d-1}$. Since $q^d-1=(q-1)S$ is divisible by $2^{A+1}$, $q^{d-1}\equiv q^{-1}\pmod{2^{A-2}}$, so $4q^{d-1}\equiv4q^{-1}\equiv 4L\pmod{2^A}$. The last statement is the lifting-the-exponent lemma, as in Lemma~\ref{lem:classgadget}.
+\end{proof}
+
+\begin{proposition}\label{prop:2A}
+Let $A\ge4$ and $L$ odd. There is an effectively computable $N_A(L)$ such that an $\MH(n,2^A)$ exists for every $n\equiv4L\pmod{2^A}$ with $n\ge N_A(L)$.
+\end{proposition}
+
+\begin{proof}
+If $L\equiv1\pmod{2^{A-2}}$, $J-2I$ works for every such $n$. Otherwise we build two gadgets of class $4L$.
+
+\emph{First gadget.} Take a prime $q_1\equiv L^{-1}\pmod{2^{A-2}}$; if $L^{-1}\equiv-1\pmod{2^{A-2}}$, take moreover $q_1\equiv2^A-1\pmod{2^{A+1}}$, so that $v_2(q_1+1)=A$. If $L^{-1}\not\equiv-1$, then $2^{A-2}\nmid q_1+1$, so $v_2(q_1+1)\le A-3$. Put $d_1=2^{A+1-v_2(q_1+1)}\ge2$. By Lemma~\ref{lem:2adic}, $v_2(S_1)=A$ exactly, so the step $a_1=q_1S_1$ satisfies $a_1=2^Ab_1$ with $b_1$ odd.
+
+\emph{Second gadget.} Take a prime $q_2\equiv L^{-1}\pmod{2^{A-2}}$ with $q_2\equiv1\pmod\ell$ for every odd prime $\ell\mid a_1$, and $d_2=2^{\max(1,\,A+1-v_2(q_2+1))}$. Then $v_2(S_2)\ge A$, so $a_2=2^Ab_2$ with $b_2$ an integer. For each odd prime $\ell\mid a_1$, $S_2\equiv d_2\not\equiv0\pmod\ell$ and $\ell\nmid q_2$, so $\ell\nmid a_2$. Hence $\gcd(b_1,b_2)=1$.
+
+\emph{Base.} Take a prime $q_0\equiv4L-1\pmod{2^A}$. Paley's construction gives a Hadamard matrix of order $n_0=q_0+1\equiv4L\pmod{2^A}$.
+
+Both gadgets have class $4L$, and each splice keeps the order $\equiv n_0\pmod{2^A}$, so they may be applied in any order. The orders reached include $n_0+2^A(xb_1+yb_2)$ for all $x,y\ge0$. Every integer $s\ge(b_1-1)(b_2-1)$ has this form $xb_1+yb_2$. So $N_A(L)=n_0+2^A(b_1-1)(b_2-1)$ works.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:E}]
+Let $n\equiv0\pmod4$ and write $n=2^kn''$ with $n''\equiv4\pmod8$. If $k\ge A-3$, then $J-2I$ of order $n''$ is an $\MH(n'',8)$, and doubling $k$ times gives an $\MH(n,2^{k+3})$, which is an $\MH(n,2^A)$. If $k\le A-4$, apply Proposition~\ref{prop:2A} at modulus $2^{A-k}$, where $A-k\ge4$, to $n''\ge n/2^{A-4}$, and double $k$ times. Hence
+\[
+N(2^A)\le2^{A-4}\max_{4\le i\le A}\ \max_{L}N_i(L).
+\]
+For the size, take each prime least in its progression. Then $d_1,d_2\le2^A$. Linnik's theorem gives $\log q_1=O(A)$, so $\log a_1=O(A2^A)$. The prime $q_2$ lies in a progression modulo at most $2^{A-2}a_1$, so $\log q_2=O(A2^A)$ and $\log a_2=O(A4^A)$. Also $\log n_0=O(A)$. Hence $\log N(2^A)=O(A4^A)$.
+\end{proof}
+
+No input from Eliahou and Kervaire's $32$-modular theorem is used. For $A\le9$ the Paley base may be replaced by a real Hadamard matrix of order $4L_0\le2^A-4$, $L_0\equiv L\pmod{2^{A-2}}$; all such orders are below $668$ and were known long before 2026.
+
+\begin{remark}[size]\label{rem:size}
+Take $A=7$ and $L=31$, so $n\equiv124\pmod{128}$. Here $q_1=127$ and $d_1=2$: the complement of $\PG(2,127)$, with $v=16257$ and $a_1=127\cdot128$. For the second gadget, $q_2=383$ and $d_2=2$: the complement of $\PG(2,383)$, with $v=147073$ and $a_2=383\cdot384=1149\cdot128$. Both have class $4q\equiv124\pmod{128}$ and satisfy $2k-v-1=(q-2)(q+1)\equiv0\pmod{128}$. The normalized steps $b_1=127$ and $b_2=1149=3\cdot383$ are coprime. With base $H(124)$, every $n\equiv124\pmod{128}$ with $n\ge124+128\cdot126\cdot1148=18515068$ is covered.
+
+The classes $L\equiv1\pmod4$ are much worse for projective gadgets. A complement of $\PG(d,q)$ as in Lemma~\ref{lem:2adic} for such a class has $q\equiv L^{-1}\equiv1\pmod4$, so $v_2(q+1)=1$, $v_2(d)\ge A$, $d\ge2^A$, and its step exceeds $q^{2^A}\ge5^{2^A}$. For $A=7$ the least such $q$ in the seven classes $L\equiv1\pmod 4$, $L\not\equiv1\pmod{32}$ are $5,9,13,17,25,29,53$. The steps therefore range from about $10^{89}$ to about $10^{221}$. This is a limit of projective gadgets, not of the problem.
+\end{remark}
+
+\section{Proofs of Theorems~\ref{thm:F}--\ref{thm:H}}\label{sec:FGH}
+Throughout, $b$ is odd, $M$ is the modulus at which we work, and the class of $n$ is $c=n\bmod M$. For a prime $p$, $v_p$ is the $p$-adic valuation, with $v_p(0)=\infty$, and $p^{a_p}\parallel b$. The proofs use Lemma~\ref{lem:splice} (valid at every modulus), Lemma~\ref{lem:PG}, Paley's constructions, Dirichlet's theorem, Brouwer's designs and Seberry's theorem. Effectivity follows as in Section~\ref{sec:CD}: every prime is taken least in its progression (Linnik's theorem bounds it), and there are finitely many classes. No threshold was evaluated.
+
+\emph{Two steps.} If two designs have the same class modulo $M$, with steps $a_1,a_2$ and $G=\gcd(a_1,a_2)$, the splices may be applied in any order. From an $\MH(n_0,M)$ they give an $\MH(n,M)$ for every $n\equiv n_0\pmod G$ with $n\ge n_0+G(a_1/G-1)(a_2/G-1)$.
+
+\subsection{Tools}
+\begin{lemma}[projective steps at any modulus]\label{lem:PGM}
+Let $M\ge2$, let $Q$ be a prime power prime to $M$, $d\ge2$ and $S_d=(Q^d-1)/(Q-1)$. If $M\mid S_d$, the complement of $\PG(d,Q)$ satisfies the conditions of Lemma~\ref{lem:splice} modulo $M$, with step $QS_d$ and class $4Q^{-1}$. If $e=\ord_M(Q)$ and $Me\mid d$, then $M\mid S_d$. If $Q\equiv1\pmod4$ and $d$ is even, then $v_2(S_d)=v_2(d)$.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:PG}, $v-1=QS_d$ and $2k-v-1=(Q-2)S_d$ vanish modulo $M$, and $Q^d-1=(Q-1)S_d\equiv0$ gives $4Q^{d-1}\equiv4Q^{-1}$. If $Me\mid d$, then $S_d=S_e\sum_{j<d/e}Q^{ej}\equiv(d/e)S_e\equiv0\pmod M$. For odd $Q$ and even $d$, the lifting-the-exponent lemma gives $v_2(Q^d-1)=v_2(Q-1)+v_2(Q+1)+v_2(d)-1$, so $v_2(S_d)=v_2(Q+1)+v_2(d)-1$, which is $v_2(d)$ when $Q\equiv1\pmod 4$.
+\end{proof}
+
+\begin{lemma}[Brouwer steps]\label{lem:brouwer}
+Let $Q$ be an odd prime power and $d\ge1$. There is a symmetric $\bigl(1+2QS_d,\,Q^d,\,Q^{d-1}(Q-1)/2\bigr)$ design~\cite{Br83}. Let $M=2^Ab$ with $A\ge2$, $\gcd(Q,M)=1$ and $2^{A-1}b\mid S_d$. Then this design satisfies the conditions of Lemma~\ref{lem:splice} modulo $M$, with step $2QS_d$ and class $2+2Q^{-1}$. This design has class $c$ if and only if $4\mid c$, $c-2$ is a unit modulo $b$, $Q\equiv2(c-2)^{-1}\pmod b$ and $Q^{-1}\equiv c/2-1\pmod{2^{A-1}}$.
+\end{lemma}
+
+\begin{proof}
+Brouwer's construction needs a Hadamard matrix of order $2Q+2$, which exists by Paley's constructions (doubling a Paley matrix of order $Q+1$ if $Q\equiv3\pmod4$, Paley's second construction if $Q\equiv1\pmod4$)~\cite{Br83,Pa33}. One checks $\lambda(v-1)=Q^d(Q^d-1)=k(k-1)$, and
+\[
+v-1=2QS_d,\qquad 2k-v-1=2(Q-1)S_d-2QS_d=-2S_d,\qquad 4(k-\lambda)=2Q^{d-1}(Q+1).
+\]
+Since $M\mid2S_d$, the first two vanish modulo $M$, and $2Q^{d-1}(Q+1)-2Q^{-1}(Q+1)=2Q^{-1}(Q+1)(Q-1)S_d\equiv0$. Modulo $b$, $c\equiv2+2Q^{-1}$ means $c-2\equiv2Q^{-1}$, a unit, and $Q\equiv2(c-2)^{-1}$. Modulo $2^A$, it means that $c$ is even and $c/2\equiv1+Q^{-1}\pmod{2^{A-1}}$; since $Q^{-1}$ is odd, $c/2$ is even.
+\end{proof}
+
+\begin{lemma}[tensor seeds]\label{lem:seed}
+Let $M=b$ or $M=4b$, and let $c$ be a class modulo $M$, with $4\mid c$ if $M=4b$. Let $D$ be a design of class $c$ modulo $M$ with step $a$, and put $g=\gcd(c,b)$. Let $h$ be the order of a real Hadamard matrix such that $4h\equiv c\pmod b$; $v_p(h)=v_p(g)$ for every prime $p\mid b$; $\ell\nmid h$ for every odd prime $\ell\mid a$ with $\ell\nmid b$; and $4\mid h$ if $M=4b$. Put $w=\min(v_2(h),v_2(a))$. Then an $\MH(n,M)$ exists for every $n\equiv c\pmod M$ with $2^w\mid n$ and $n\ge h(4+a)$.
+\end{lemma}
+
+\begin{proof}
+Put $b_0=b/g$. For $u\ge0$, $(J-2I)_{4+b_0u}^2=b_0uJ+4I$, so the Gram matrix of $H_h\otimes(J-2I)_{4+b_0u}$ is $h(4+b_0u)I+hb_0u(I\otimes J-I)$. Since $g\mid h$, $b\mid hb_0$, and $4b\mid hb_0$ if $4\mid h$; so this is an $\MH(h(4+b_0u),M)$. We need $hb_0u\equiv n-4h\pmod a$. At a prime $p\mid b$, $v_p(hb_0)=v_p(b)\le v_p(a)$, because $M\mid a$ and $v_p(h)=v_p(g)$; the odd primes of $a$ outside $b$ do not divide $hb_0$. Hence $\gcd(hb_0,a)=b\,2^w$. It divides $n-4h$: modulo $b$, $n-4h\equiv c-c=0$, and $2^w$ divides $n$ and $4h$. So there is a solution $u$ with $0\le u<a/\gcd(hb_0,a)$, and then $hb_0u<ha$. The seed order is $<h(4+a)\le n$ and is $\equiv n\pmod a$, hence $\equiv c\pmod M$. Apply Lemma~\ref{lem:splice} with $D$ to reach $n$.
+\end{proof}
+
+\begin{lemma}[Paley seeds]\label{lem:paley}
+Let $c$ be a residue modulo $b$, let $\ell_1,\dots,\ell_r$ be odd primes not dividing $b$, and let $U$ be the set of primes $p\mid b$ with $p\nmid c$. There is a Paley order $h=P+1$, with $P$ prime and $P\equiv3\pmod8$, satisfying the conditions on $h$ in Lemma~\ref{lem:seed} for $\ell\in\{\ell_1,\dots,\ell_r\}$, with $v_2(h)=2$, unless $c\equiv4\pmod p$ for some $p\in U$. There is such an $h=2(P+1)$, with $P$ prime and $P\equiv1\pmod4$, unless $c\equiv8\pmod p$ for some $p\in U$.
+\end{lemma}
+
+\begin{proof}
+Prescribe $h$ as follows. At $p\mid b$: if $v_p(c)<a_p$, put $h\equiv c/4\pmod{p^{a_p}}$, so $v_p(h)=v_p(c)=v_p(g)$; if $v_p(c)\ge a_p$, put $h\equiv p^{a_p}\pmod{p^{a_p+1}}$. At each $\ell_i$: $h\equiv2$ for the first type and $h\equiv4$ for the second. The corresponding residue of $P$ is $h-1$ or $h/2-1$. It is $\equiv1$ modulo each $\ell_i$, and $\equiv-1$ modulo each $p\mid b$ with $p\mid c$. At $p\in U$ it is a unit unless $h\equiv1$ (first type) or $h\equiv2$ (second type) modulo $p$, that is, unless $c\equiv4$ or $c\equiv8\pmod p$. Adding $P\equiv3\pmod8$, respectively $P\equiv1\pmod4$, gives $h\equiv4\pmod8$ in both cases. All residues are units and the moduli are pairwise coprime, so Dirichlet's theorem gives $P$, and Paley's constructions~\cite{Pa33} give a Hadamard matrix of order $h$.
+\end{proof}
+
+At a prime $p\mid c$ neither restriction applies, since $h\equiv0\pmod p$ there. With $M=4b$ and a Paley seed, $w\le2$ in Lemma~\ref{lem:seed}, so every large $n\equiv c\pmod{4b}$ is reached.
+
+\subsection{Proof of Theorem~\ref{thm:G}}
+First let $m=b$ be odd. We use induction on $b$; for $b=1$ every $\pm1$ matrix is an $\MH(n,1)$.
+
+\emph{Classes $c$ prime to $b$.} Take a prime $Q\equiv4c^{-1}\pmod b$ and $d=b\,\ord_b(Q)$. By Lemma~\ref{lem:PGM} the complement of $\PG(d,Q)$ has class $c$ modulo $b$; we do not restrict $Q$ modulo $4$, so $v_2(a)$ is not controlled. Take $h=h_1\cdots h_k$, $k\in\{2,3\}$, with Paley orders $h_i=P_i+1$, $P_i\equiv3\pmod8$ prime, so that $h\equiv c/4\pmod b$, $h_i\not\equiv0,1$ modulo every $p\mid b$, and $h_i\equiv2$ modulo every odd prime $\ell\mid a$ with $\ell\nmid b$. If $3\mid b$, every $h_i\equiv2\pmod3$, so $h\equiv(-1)^k$; take $k=2$ if $c/4\equiv1\pmod 3$ and $k=3$ if $c/4\equiv2\pmod 3$. If $3\nmid b$, take $k=2$. At $p\ge5$ with target $t\equiv c/4$: for $k=2$ choose $h_1\notin\{0,1,t\}$ modulo $p$ and $h_2\equiv t/h_1$, so $h_2\notin\{0,1\}$; for $k=3$ put $h_3\equiv2$ and treat $t/2$ in the same way. Lift to $p^{a_p}$ by choosing lifts of $h_1,\dots,h_{k-1}$ and solving for $h_k$. Each $P_i$ lies in a reduced class, so Dirichlet's theorem applies, and $H_{h_1}\otimes\cdots\otimes H_{h_k}$ is a Hadamard matrix of order $h$. Lemma~\ref{lem:seed} with $M=b$ applies with $g=1$. As $v_2(a)$ is not controlled, $w$ may be as large as $v_2(h)=2k\le6$; this is why we ask $64\mid n$ rather than $16\mid n$. So an $\MH(n,b)$ exists for every large $n\equiv c\pmod b$ with $64\mid n$.
+
+\emph{Classes with $g=\gcd(c,b)>1$.} Every $n\equiv c\pmod b$ is divisible by $g$. Let $H_{2^sg}$ be a Hadamard matrix with $s=s(g)$~\cite{Se76}. If $2^{s+L(b/g)}\mid n$ and $n\ge2^sgN(b/g)$, then $n'=n/(2^sg)$ satisfies $2^{L(b/g)}\mid n'$ and $n'\ge N(b/g)$, so by induction there is an $\MH(n',b/g)$, $X$, with $XX\tr=n'I+(b/g)K$. Then $(H_{2^sg}\otimes X)(H_{2^sg}\otimes X)\tr=nI+2^sb(I\otimes K)\equiv nI\pmod b$.
+
+Taking the maximum over the classes gives $L(b)$ as in the theorem, and $N(b)$. For $m=2^Ab$, let $X$ be an $\MH(n',b)$ with $n'=n/2^A$ and $XX\tr=n'I+bK$. With $H_{2^A}$ the Sylvester matrix, $(H_{2^A}\otimes X)(H_{2^A}\otimes X)\tr=nI+2^Ab(I\otimes K)$, an $\MH(n,m)$. So $L(m)=A+L(b)$ and $N(m)=2^AN(b)$ work. \qed
+
+\subsection{Two ways to remove the extra power of 2}
+\begin{lemma}[skew assembly]\label{lem:skew}
+Let $c$ be a class modulo $4b$ with $4\mid c$ and $\gcd(c-1,b)=1$. Then an $\MH(n,4b)$ exists for every large $n\equiv c\pmod{4b}$.
+\end{lemma}
+
+\begin{proof}
+Let $L=L(4b)\ge2$ be as in Theorem~\ref{thm:G}, and fix a residue $r$ of $n$ modulo $2^L$, with $4\mid r$. The unit $c-1$ has inverse $\equiv3\pmod4$, and $-r-1\equiv3\pmod 4$, so the congruences
+\[
+t-1\equiv(c-1)^{-1}\pmod{4b},\qquad t-1\equiv-r-1\pmod{2^L}
+\]
+agree modulo $4$ and define a unit class modulo $2^Lb$. Dirichlet's theorem gives a prime $t-1\equiv3\pmod4$ in it, and Paley's construction~\cite{Pa33} gives a skew conference matrix $S$ of order $t$: $S\tr=-S$, $SS\tr=(t-1)I$, zero diagonal. By Theorem~\ref{thm:G} take normalized $\MH(n_i,4b)$, $1\le i\le t$, with $n_i\equiv c\pmod{4b}$ and $2^L\mid n_i$, and let $C_i$ be their cores, of orders $d_i=n_i-1$. Form the block matrix $X$ with diagonal blocks $C_i$ and off-diagonal blocks $S_{ij}J$ (of size $d_i\times d_j$); its order is $N=\sum_id_i$. Using $C_i\one\equiv-\one$, $C_iC_i\tr\equiv n_iI-J$ and $d_k\equiv c-1$, the Gram blocks of $X$ are, modulo $4b$,
+\begin{align*}
+(i,i):&\quad n_iI-J+\textstyle\sum_{k\ne i}d_kJ=n_iI+(N-n_i)J,\\
+(i,j),\ i\ne j:&\quad -(S_{ji}+S_{ij})J+(c-1)\textstyle\sum_{k\ne i,j}S_{ik}S_{jk}J=(c-1)(SS\tr)_{ij}J=0.
+\end{align*}
+So $X$ is an $\MH(N,4b)$ if $N\equiv c$. Now $N=\sum_in_i-t\equiv t(c-1)$, and $t(c-1)\equiv c$ is the first congruence. Also $N\equiv-t\equiv r\pmod{2^L}$. Take $n_1=\dots=n_{t-1}$ fixed and let $n_t$ run through its progression with difference $2^Lb$; then $N$ runs through every large order $\equiv c\pmod{4b}$ and $\equiv r\pmod{2^L}$. There are finitely many residues $r$.
+\end{proof}
+
+\begin{lemma}[a step with two factors of 2]\label{lem:v2two}
+Let $c$ be a class modulo $4b$ with $4\mid c$, and let $D$ be a design of class $c$ modulo $4b$ whose step $a$ has $v_2(a)=2$. Then an $\MH(n,4b)$ exists for every large $n\equiv c\pmod{4b}$.
+\end{lemma}
+
+\begin{proof}
+Write $a=4a'$ with $a'$ odd and $L=L(4b)$. Given $n$, choose $0\le j<2^{L-2}$ with $a'j\equiv n/4\pmod{2^{L-2}}$. Then $2^L\mid n-ja$ and $n-ja\equiv c\pmod{4b}$, so for $n\ge N(4b)+2^{L-2}a$ Theorem~\ref{thm:G} gives an $\MH(n-ja,4b)$, and $j$ splices with $D$ give an $\MH(n,4b)$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:H}}
+Replacing $m$ by a multiple, we may assume $m=M=2^Ab$ with $A\ge2$. Fix a class $c$ modulo $M$ with $4\mid c$ and, for each prime $p\mid b$, $c\equiv0$ or $c\equiv4\pmod p$ (modulo $p$, not $p^{a_p}$). Then $c-2\equiv-2$ or $2\pmod p$ is a unit modulo $b$, and Lemma~\ref{lem:brouwer} asks for $Q\equiv2(c-2)^{-1}\pmod b$ and $Q^{-1}\equiv c/2-1\pmod{2^{A-1}}$. We choose $d$ so that $v_2(S_d)=A-1$ and $v_p(S_d)=a_p$ exactly.
+\begin{itemize}
+\item If $c\equiv4\pmod p$, then $Q\equiv1\pmod p$, and $v_p(S_d)=v_p(d)$. Put $v_p(d)=a_p$.
+\item If $c\equiv0\pmod p$, then $Q\equiv-1\pmod p$ and $Q+1\equiv c/(c-2)\pmod{p^{a_p}}$. Let $e_p=\min(v_p(c),a_p)$. If $v_p(c)<a_p$, then $v_p(Q+1)=e_p$; otherwise prescribe $Q$ modulo $p^{a_p+1}$ so that $v_p(Q+1)=a_p=e_p$. Put $v_p(d)=a_p-e_p$, with $d$ even. Since $Q-1$ is a unit at $p$, $v_p(S_d)=v_p(Q^2-1)+v_p(d/2)=e_p+(a_p-e_p)=a_p$.
+\item At $2$, let $s=\min(v_2(c),A)\ge2$. Since $1+Q^{-1}\equiv c/2\pmod{2^{A-1}}$, $v_2(Q+1)=s-1$ if $s<A$; if $s=A$, prescribe $Q$ modulo $2^A$ so that $v_2(Q+1)=A-1$. Put $v_2(d)=A-s+1\ge1$. Then $v_2(S_d)=(s-1)+(A-s+1)-1=A-1$, and the step $2QS_d$ has $v_2=A$.
+\end{itemize}
+Let $d$ have exactly these valuations and no other prime factors. All prescriptions on $Q$ are units ($\pm1$ modulo $p$, odd at $2$). Take a prime $Q_1$ satisfying them, with step $a_1$, and a prime $Q_2$ satisfying them and $Q_2\equiv1\pmod\ell$ for every prime $\ell\mid a_1$ with $\ell\nmid M$. Such $\ell$ does not divide $d$, so $S_d(Q_2)\equiv d\not\equiv0\pmod\ell$, and $\ell\nmid a_2$. Both steps have valuation exactly $A$ at $2$ and exactly $a_p$ at each $p\mid b$, so $\gcd(a_1,a_2)=M$. For the seed, $2(P+1)\equiv c\pmod M$ means $P\equiv c/2-1\pmod{2^{A-1}b}$; this residue is odd and $\equiv\mp1$ modulo each $p\mid b$, so Dirichlet's theorem gives $P$. Paley's second construction (if $P\equiv1\pmod4$) or a doubled Paley matrix (if $P\equiv3\pmod4$) gives a real Hadamard matrix of order $2(P+1)$. The two-step argument then reaches every large $n\equiv c\pmod M$, with no extra power of $2$. There are finitely many classes. \qed
+
+\subsection{Proof of Theorem~\ref{thm:F}}
+Let $c$ be a class modulo $m$ with $4\mid c$.
+
+\emph{$m=4p^a$, $p\nmid c$.} Take a prime $Q\equiv4c^{-1}\pmod{p^a}$ with $Q\equiv1\pmod4$, and $d=4p^a\ord_{p^a}(Q)$; as $\ord_4(Q)=1$, Lemma~\ref{lem:PGM} gives a design of class $c$ modulo $4p^a$ (this includes $Q\equiv1\pmod p$, the case $c\equiv4\pmod p$). By Lemma~\ref{lem:paley}, the first Paley type fails only if $c\equiv4\pmod p$ and the second only if $c\equiv8\pmod p$. Since $4\not\equiv8\pmod p$, one of them gives a seed with $v_2(h)=2$, and Lemma~\ref{lem:seed} covers every large $n\equiv c$.
+
+\emph{$m=4p^a$, $p\mid c$.} Here $c-2\equiv-2\pmod p$ is a unit. Lemma~\ref{lem:brouwer} with $A=2$ applies with a prime $Q\equiv2(c-2)^{-1}\pmod{p^a}$, $Q$ odd, and $d=2p^a\ord_{p^a}(Q)$, since then $2p^a\mid S_d$ by Lemma~\ref{lem:PGM}. Neither Paley restriction applies, because $U=\varnothing$. Lemma~\ref{lem:seed} covers every large $n\equiv c$.
+
+\emph{$m=4pq$.} If $\gcd(c-1,pq)=1$, use Lemma~\ref{lem:skew}. Otherwise $c\equiv1$ modulo at least one of $p,q$.
+\begin{itemize}
+\item \emph{Classes that are not units.} Then $c\equiv0$ modulo one prime and $c\equiv1$ modulo the other; say $c\equiv0\pmod p$ and $c\equiv1\pmod q$. Since $c-2\equiv-2$ and $-1$ are units, Lemma~\ref{lem:brouwer} applies, with $Q\equiv2(c-2)^{-1}\pmod{pq}$ odd and $d=2pq\ord_{pq}(Q)$. In Lemma~\ref{lem:paley}, $U=\{q\}$ and $c\equiv1$ there; the first type fails only if $1\equiv4$, i.e.\ $q=3$, and the second only if $1\equiv8$, i.e.\ $q=7$. One type gives a seed.
+\item \emph{Unit classes.} Take $Q\equiv4c^{-1}\pmod{pq}$, $Q\equiv1\pmod4$, $d=4pq\ord_{pq}(Q)$. A Paley seed exists unless, after relabelling, $c\equiv4\pmod p$ and $c\equiv8\pmod q$. As $c\equiv1$ modulo $p$ or $q$, this forces $p=3$ or $q=7$.
+\begin{itemize}
+\item[--] If $q=7$: $Q\equiv1\pmod p$ and $Q\equiv4\cdot8^{-1}\equiv4\pmod7$, so $\ord_{pq}(Q)=3$. With $Q\equiv1\pmod4$ and $d=12pq$, Lemma~\ref{lem:PGM} gives $v_2(a)=v_2(d)=2$, and Lemma~\ref{lem:v2two} applies.
+\item[--] If $p=3$: take $h=2(q^2+1)$, a Paley order from the field of $q^2$ elements, as $q^2\equiv1\pmod4$. Then $h\equiv1\equiv c/4\pmod3$, $h\equiv2\equiv c/4\pmod q$, and $h\equiv4\pmod{16}$. The odd primes $\ell\mid q^2+1$ differ from $3$ and $q$. Choose the prime $Q$ with $Q\equiv4c^{-1}\pmod{3q}$, $Q\equiv1\pmod4$, and $Q\equiv1$ modulo each such $\ell$; then $d=12q\ord_q(Q)$, since $Q\equiv1\pmod3$. The primes of $d$ are $2$, $3$, $q$ and primes dividing $q-1$, and a prime dividing both $q-1$ and $q^2+1$ divides $2$. So $\ell\nmid d$, $S_d\equiv d\not\equiv0\pmod\ell$, and $\ell\nmid a$. Lemma~\ref{lem:seed} applies with this $h$, which avoids the restriction of Lemma~\ref{lem:paley} because the field has $q^2$ elements.
+\end{itemize}
+\end{itemize}
+For $m=140$, among the classes not covered by Lemma~\ref{lem:skew}, the only unit class without a Paley seed is $c\equiv4\pmod5$, $c\equiv1\pmod7$, which falls under $q=7$. This completes the proof. \qed
+
+For $m=140$ a separate construction, not reproduced here, gives explicit thresholds in the two progressions $n\equiv196$ and $n\equiv260\pmod{280}$ (the classes $21$ and $15$ modulo $35$ at orders $\equiv4\pmod8$): from $n=123956$ and from $n=15185780$ onward. Neither these thresholds nor the proof above uses Theorem~\ref{thm:A}.
+
+\begin{proposition}\label{prop:fermat}
+Let $p$ be an odd prime such that $p-1$ is a power of $2$, and let $a\ge1$, $A\ge0$. Then an $\MH(n,2^Ap^a)$ exists for every large $n\equiv0\pmod4$.
+\end{proposition}
+
+\begin{proof}
+If $A\le2$, use Theorem~\ref{thm:F}. Let $A\ge3$ and $m=2^Ap^a$. If $p\mid n$, Theorem~\ref{thm:H} applies. Let $p\nmid n$, and write $n=2^kn''$ with $n''\equiv4\pmod8$. If $k\ge A-2$, then $n/2^{A-2}$ is a large multiple of $4$; Theorem~\ref{thm:F} gives an $\MH(n/2^{A-2},4p^a)$, and doubling $A-2$ times gives an $\MH(n,m)$. If $k<A-2$, put $B=A-k\ge3$ and $M=2^Bp^a$; an $\MH(n'',M)$ doubled $k$ times is an $\MH(n,m)$, and there are finitely many $B$. Let $c'=n''\bmod M$, so $c'\equiv4\pmod8$ and $p\nmid c'$. Take an odd prime $Q$ with $Q\equiv4/c'\pmod{p^a}$ and $Q\equiv(c'/4)^{-1}\pmod{2^{B-2}}$, and $d=2^up^a$ with $2^u$ divisible by $p-1$ and $u\ge B$. Then $\ord_{p^a}(Q)\mid(p-1)p^{a-1}\mid d$. If $Q\not\equiv1\pmod p$, then $p^a\mid Q^d-1$ and $Q-1$ is a unit at $p$, so $p^a\mid S_d$; if $Q\equiv1\pmod p$, $v_p(S_d)=v_p(d)=a$. Also $v_2(S_d)=v_2(Q+1)+u-1\ge u\ge B$. So $M\mid S_d$, and by Lemma~\ref{lem:PGM} the complement of $\PG(d,Q)$ has class $4Q^{-1}\equiv c'\pmod M$. Take a second prime $Q_2$ with the same prescriptions and $Q_2\equiv1$ modulo every prime $\ell\notin\{2,p\}$ dividing the first step; then $\ell\nmid S_d(Q_2)$, and the gcd $G$ of the two steps has no prime factors other than $2$ and $p$, with $8\mid G$. For each residue $\rho$ modulo $G$ with $\rho\equiv c'\pmod M$, a real Paley seed of order $\equiv\rho\pmod G$ exists: $\rho\equiv4\pmod 8$ and $p\nmid\rho$, and Paley's first construction works unless $\rho\equiv1\pmod p$, the second unless $\rho\equiv2\pmod p$. The two-step argument covers every large $n''\equiv\rho\pmod G$.
+\end{proof}
+
+\section{Remarks}\label{sec:remarks}
+
+\paragraph{What remains.}
+\begin{itemize}
+\item \emph{Primes $p\equiv1\pmod8$.} The arguments of Section~\ref{sec:CD} give all large $n\equiv0\pmod4$, all large odd $n$ in classes $\langle4\rangle O\cup\{0\}$, and all large $n\equiv2\pmod4$ in classes $c$ with $c\in\{0,4\}$, $v_2(e_c)\le1$, or $c/2\in\langle4\rangle O$. Here $2\in Q$, so the image of $4$ in $G/O$ has order at most $2^{s-2}$, and $\langle4\rangle O$ is a proper subgroup of $Q$. For $p=17$ ($O=\{1\}$, $\langle4\rangle=\{1,4,13,16\}$) the odd classes $2,8,9,15$ and the classes $1,3,5,6,7,10,11,12,14,16$ for $n\equiv2\pmod4$ are left open. This is the coverage of these constructions only. No obstruction is known: Lemma~2.2 of~\cite{K} does not apply to even $n$, and the uncovered odd classes are squares. Other designs are not excluded. A design gadget with odd step has $v$ even, so $k-\lambda$ is a square by the Bruck--Ryser--Chowla theorem~\cite{IT07}, and its class $4(k-\lambda)$ lies in $Q$, but not necessarily in $\langle4\rangle O$. We have not searched for such designs.
+\item \emph{$m=7$ and $n\equiv2\pmod4$.} Theorem~\ref{thm:A} does not cover Kuperberg's class $n\equiv26\pmod{28}$, where her construction starts near $4.5\times10^{36}$~\cite[Proposition~4.7]{K}. Theorem~\ref{thm:D} at $p=7$ covers it beyond an effective threshold, which we have not evaluated.
+\item \emph{Composite moduli.} Modulo $4b$, a class $c$ admits no projective step, no Brouwer step and no skew assembly exactly when $c\equiv0$, $c\equiv1$ and $c\equiv2$ modulo three different primes dividing $b$; other classes can fail for lack of a suitable seed. For the test case $m=105$, $n\equiv156\pmod{840}$ of Section~\ref{sec:intro}, the orders $n\equiv51\pmod{105}$ with $8\mid n$ are covered: $n/2\equiv78\pmod{105}$, $78-2$ is a unit, and Lemmas~\ref{lem:brouwer}, \ref{lem:seed} and~\ref{lem:paley} (first type) at modulus $420$, followed by doubling, apply. At $v_2(n)=2$, doubling needs an $\MH(n/2,105)$ at an order $\equiv2\pmod4$ in class $78$, where only Brouwer steps apply; these steps are divisible by $4$ (here $Q\equiv-1\pmod3$, so $3\mid S_d$ forces $d$ even, and then $S_d=1+Q+\dots+Q^{d-1}$ is even, so the step $2QS_d$ is divisible by $4$), so the seed must have order $\equiv2\pmod4$ divisible by $3$, which neither a real Hadamard matrix nor Lemma~\ref{lem:seed} provides, and this route reduces to $H_2$ times an odd-order matrix of class $39$. The route $H_4\otimes\MH(n/4,105)$ needs an odd order $n/4\equiv39\pmod{105}$; Brouwer steps there have even step and skew assemblies have even $t$, so both need an odd-order input of class $39$. The list of methods is not exhaustive. We did not try gadgets for Lemma~\ref{lem:general} built from tensor powers of design sign matrices, combined with a row-parity argument; a separate construction for $m=140$ uses exactly this to cover the progression $n\equiv260\pmod{280}$. For class $51$ modulo $105$ such a gadget would need $v\equiv1$, row sums $\equiv1$, and $BB\tr\equiv J\pmod3$, $\equiv I\pmod 5$ and $\equiv2I-J\pmod7$.
+\item \emph{Effective thresholds.} The constants in Theorems~\ref{thm:C}, \ref{thm:E} and~\ref{thm:F}--\ref{thm:H} were not evaluated. For $p=11$ and $13$, Theorem~\ref{thm:B} needs no threshold. The same recipe may work for other small primes: use the classes $0,4,8,16$, then designs with $v\equiv1$, $k\equiv1$, $4(k-\lambda)\equiv c$ and $\operatorname{lcm}(v-1,4)<2396$, then doubling. The hard classes are those where $u_c$ has order $p-1$, since there the projective steps are about $q^{p-1}$. We have not tried primes beyond $13$.
+\item \emph{Problem 10.} A natural finite route to Problem~10 would use, for each odd $L$ with $3\le L\le31$, a $\pm1$ matrix $B$ of order $129$ with row sums $\equiv1$ and off-diagonal row inner products $\equiv1-4L\pmod{128}$ as a splicing gadget (Lemma~\ref{lem:general}). No such matrix exists for $L=31$. There the off-diagonal inner products lie in $\{5,-123\}$. If $x\cdot y=-123$ for two rows, then $\|x+y\|^2=12$, so by Cauchy--Schwarz every third row $z$ has $z\cdot x=z\cdot y=5$, and the Hamming distances $126,62,62$ violate the triangle inequality. Hence $BB\tr=124I+5J$. The row sums lie in $\{-127,1,129\}$, and the values $-127$ and $129$ contradict the inner product $5$ with another row, so $B\one=\one$. Since $BB\tr\one=769\cdot\one=769\,B\one$ and $B$ is invertible, every column sum of $B$ equals $769>129$, which is impossible. Several gadgets per class whose steps $(v-1)/128$ have greatest common divisor $1$ suffice for all but finitely many $n$, as in Theorem~\ref{thm:E}. At $m=128$ the projective bound exceeds $10^{89}$ in the classes $n/4\equiv1\pmod4$, $n/4\not\equiv1\pmod{32}$.
+\end{itemize}
+
+\paragraph{Role of AI.}
+AI assisted the source search, the derivations and their independent re-derivation, and the exposition under the author's direction. The constructions for $m=140$ and the composite-modulus results (Theorems~\ref{thm:F}--\ref{thm:H} and Proposition~\ref{prop:fermat}) were found by a different AI system (Codex) working under the author's direction; their proofs were then audited independently, by hand, by a separate AI agent. No independent human expert has examined the paper.
+
+\begin{footnotesize}
+\begin{thebibliography}{99}
+\bibitem{ADP20} S.~H.~Alavi, A.~Daneshkhah and C.~E.~Praeger, \href{https://arxiv.org/abs/2004.04535}{Symmetries of biplanes}, arXiv:2004.04535, 2020.
+\bibitem{AVR26} L.~Alp\"oge, P.~Voinov and S.~Reynolds-Haertle, Hadamard matrices of orders 668, 716, 892, 1132, 1244, 1388, 1436, 1676, 1772, 1916, 1948 and 1964, announcement, 12 August 2026; see \url{https://epoch.ai/frontiermath/open-problems/hadamard}.
+\bibitem{As71} M.~Aschbacher, On collineation groups of symmetric block designs, J.\ Combin.\ Theory Ser.\ A \textbf{11} (1971), 272--281.
+\bibitem{Br83} A.~E.~Brouwer, \href{https://ir.cwi.nl/pub/6553/6553D.pdf}{An infinite series of symmetric designs}, Report ZW~202/83, Mathematisch Centrum (now CWI), Amsterdam, December 1983.
+\bibitem{E25} S.~Eliahou, A $64$-modular Hadamard matrix of order $668$, Australas.\ J.\ Combin.\ \textbf{93} (2025), 422--427.
+\bibitem{E26}S.~Eliahou, \href{https://doi.org/10.1007/s10801-026-01544-5}{An update on modular Hadamard matrices}, J.\ Algebraic Combin.\ \textbf{64} (2026), article~1.
+\bibitem{EK01} S.~Eliahou and M.~Kervaire, Modular sequences and modular Hadamard matrices, J.\ Combin.\ Des.\ \textbf{9} (2001), 187--214.
+\bibitem{EK05} S.~Eliahou and M.~Kervaire, A survey on modular Hadamard matrices, Discrete Math.\ \textbf{302} (2005), 85--106.
+\bibitem{EKLO} R.~Egan, I.~S.~Kotsireas, S.~London and P.~\'O~Cath\'ain, \href{https://arxiv.org/abs/2610.27175}{Recent progress in the construction of Hadamard matrices}, arXiv:2610.27175v2, 2026.
+\bibitem{G00} M.~Garapi\'c, Some symmetric $(71,15,3)$ designs with an involutory elation, Glas.\ Mat.\ \textbf{35(55)} (2000), 211--214.
+\bibitem{HNW26} E.~Hasani, A.~Nellore and R.~Ward, Hadamard matrices of orders 668, 716, 892, 1132, 1244, 1388, 1436, 1676, 1772, 1916, 1948 and 1964, hexagonmath.org 2611.00637, 19 November 2026; aiXiv:2611.02032, \url{https://aixiv.online/abs/2611.02032}.
+\bibitem{IT07} Y.~J.~Ionin and T.~V.~Trung, Symmetric designs, in: Handbook of Combinatorial Designs, Chapman and Hall/CRC, Boca Raton, FL, 2007, 110--123.
+\bibitem{KO08} P.~Kaski and P.~R.~J.~\"Osterg\aa rd, There are exactly five biplanes with $k=11$, J.\ Combin.\ Des.\ \textbf{16} (2008), 117--127.
+\bibitem{K} V.~Kuperberg, \href{https://arxiv.org/abs/1409.0148}{Hadamard matrices modulo $p$ and small modular Hadamard matrices}, J.\ Combin.\ Des.\ \textbf{24} (2016), 393--405; arXiv:1409.0148.
+\bibitem{LS} M.~H.~Lee and F.~Sz\H{o}ll\H{o}si, \href{https://arxiv.org/abs/1307.1981}{Hadamard matrices modulo 5}, J.\ Combin.\ Des.\ \textbf{22} (2014), 171--178; arXiv:1307.1981.
+\bibitem{Li44} U.~V.~Linnik, On the least prime in an arithmetic progression.\ I.\ The basic theorem, Rec.\ Math.\ [Mat.\ Sbornik] N.S.\ \textbf{15(57)} (1944), 139--178; II.\ The Deuring--Heilbronn phenomenon, ibid., 347--368.
+\bibitem{MB72} O.~Marrero and A.~T.~Butson, Modular Hadamard matrices and related designs.\ II, Canad.\ J.\ Math.\ \textbf{24} (1972), 1100--1109.
+\bibitem{MB73} O.~Marrero and A.~T.~Butson, Modular Hadamard matrices and related designs, J.\ Combin.\ Theory Ser.\ A \textbf{15} (1973), 257--269.
+\bibitem{McF73} R.~L.~McFarland, A family of difference sets in non-cyclic groups, J.\ Combin.\ Theory Ser.\ A \textbf{15} (1973), 1--10.
+\bibitem{Me62} P.~K.~Menon, On difference sets whose parameters satisfy a certain relation, Proc.\ Amer.\ Math.\ Soc.\ \textbf{13} (1962), 739--745.
+\bibitem{Pa33} R.~Paley, On orthogonal matrices, J.\ Math.\ Phys.\ \textbf{12} (1933), 311--320.
+\bibitem{R01} S.~Rukavina, Some new triplanes of order twelve, Glas.\ Mat.\ \textbf{36(56)} (2001), 105--125.
+\bibitem{Se76}J.~Seberry Wallis, \href{https://doi.org/10.1016/0097-3165(76)90062-5}{On the existence of Hadamard matrices}, J.\ Combin.\ Theory Ser.\ A \textbf{21} (1976), 188--195.
+\bibitem{Ts26} Tseng, Two 668-order $m$-modular Hadamard matrices for $m=128$ and $m=500$, dataset, Zenodo, 18 May 2026, \href{https://doi.org/10.5281/zenodo.20267606}{doi:10.5281/zenodo.20267606}.
+\end{thebibliography}
+\end{footnotesize}
+\end{document}

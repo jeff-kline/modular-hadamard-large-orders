@@ -1,0 +1,66 @@
+cff-version: 1.2.0
+message: "Please cite Version 0.1.0 of this research repository."
+title: "Modular Hadamard matrices at large orders"
+type: software
+version: 0.1.0
+authors:
+  - family-names: Kline
+    given-names: Jeffery
+repository-code: "https://github.com/jeff-kline/modular-hadamard-large-orders"
+url: "https://github.com/jeff-kline/modular-hadamard-large-orders"
+license: GPL-3.0-only
+abstract: >-
+  An m-modular Hadamard matrix of order n is an n x n matrix H with entries
+  ±1 and H H^T = n I modulo m. The paper shows that 7-modular Hadamard
+  matrices exist at every order divisible by 4, answering Problem 11 of the
+  2026 survey of Egan, Kotsireas, London and Ó Catháin, and that 11- and
+  13-modular Hadamard matrices exist at every order divisible by 4, each
+  using one Hadamard matrix announced in 2026. At all sufficiently large
+  orders divisible by 4 it gives m-modular Hadamard matrices for every odd
+  prime, every power of 2, and every m of the form 4p^a or 4pq, including
+  m = 140; for every m it gives them at all large orders divisible by a
+  power of 2 depending on m. It also proves Kuperberg's Conjecture 5.1, with
+  0 counted as a square, for every odd prime p not congruent to 1 mod 8. The
+  proofs use the direct-sum lemma of Lee–Szőllősi and Kuperberg with
+  complements of projective geometries and Brouwer's symmetric designs. The
+  repository checks one instance of each design type exactly. Novelty is
+  bounded to the sources searched.
+keywords:
+  - Hadamard matrices
+  - modular Hadamard matrices
+  - symmetric designs
+  - projective geometry
+references:
+  - type: article
+    title: "Hadamard matrices modulo p and small modular Hadamard matrices"
+    authors:
+      - family-names: Kuperberg
+        given-names: Vivian
+    journal: "Journal of Combinatorial Designs"
+    volume: 24
+    year: 2016
+  - type: article
+    title: "Hadamard matrices modulo 5"
+    authors:
+      - family-names: Lee
+        given-names: Moon Ho
+      - family-names: Szőllősi
+        given-names: Ferenc
+    journal: "Journal of Combinatorial Designs"
+    volume: 22
+    year: 2014
+  - type: article
+    title: "Recent progress in the construction of Hadamard matrices"
+    authors:
+      - family-names: Egan
+        given-names: Ronan
+      - family-names: Kotsireas
+        given-names: Ilias S.
+      - family-names: London
+        given-names: Stephen
+      - family-names: Ó Catháin
+        given-names: Pádraig
+    identifiers:
+      - type: other
+        value: "arXiv:2610.27175"
+    year: 2026

@@ -1,0 +1,15 @@
+PG(2,13)^c params (183, 169, 156)
+m=7 PG(2,13)^c x1: order 206, mod 7: PASS; negative control PASS
+m=7 PG(2,13)^c x2: order 388, mod 7: PASS; negative control PASS
+PG(6,3)^c params (1093, 729, 486)
+m=7 PG(6,3)^c: order 1112, mod 7: PASS; negative control PASS
+(23,12,6) params (23, 12, 6)
+m=11 (23,12,6) x1: order 46, mod 11: PASS; negative control PASS
+m=11 (23,12,6) x2: order 68, mod 11: PASS; negative control PASS
+PG(5,3)^c params (364, 243, 162)
+m=11 PG(5,3)^c: order 379, mod 11: PASS; negative control PASS
+m=7 (J11-2I)^(x2): order 121, mod 7: PASS; negative control PASS
+PG(3,2)^c params (15, 8, 4)
+m=7 PG(3,2)^c: order 135, mod 7: PASS; negative control PASS
+m=140 H20 (x) MH(135,7): order 2700, mod 140: PASS
+ALL PASS
