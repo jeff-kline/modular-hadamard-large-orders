@@ -12,28 +12,21 @@ The paper is [paper/main.pdf](paper/main.pdf); its source is
 
 ## Introduction
 
-An $m$-modular Hadamard matrix of order $n$ is an $n\times n$ matrix $H$ with
-entries $\pm1$ and $HH^{\mathsf T}\equiv nI \pmod m$. Problem 11 of the 2026
-survey of Egan, Kotsireas, London and Ó Catháin asks whether 7-modular
-Hadamard matrices exist at every order divisible by 4. Kuperberg's results
-give this for all sufficiently large orders. The paper shows that they exist
-at every order divisible by 4, using only Hadamard matrices known before
-2026. The same method gives 11- and 13-modular Hadamard matrices at every
-order divisible by 4; each of these two proofs uses one Hadamard matrix
-announced in 2026, at a single order.
+A Hadamard matrix is a square matrix of 1s and −1s whose rows are pairwise
+orthogonal. Such matrices are conjectured to exist in every size divisible
+by 4. A modular Hadamard matrix asks for less: its rows need only be
+orthogonal modulo a fixed number $m$. For a few small values of $m$ these are
+known to exist in every size divisible by 4, and Kuperberg showed that for
+$m=7$ and $m=11$ they exist in all large enough sizes.
 
-At all sufficiently large orders divisible by 4, the paper gives $m$-modular
-Hadamard matrices when $m$ is an odd prime, a power of 2, or of the form
-$4p^a$ or $4pq$ with $p,q$ distinct odd primes, and hence for their divisors.
-This includes $m=140$. For every $m$ it gives them at all large orders
-divisible by a fixed power of 2 that depends on $m$. It also proves
-Kuperberg's Conjecture 5.1, with 0 counted as a square, for every odd prime
-$p\not\equiv1\pmod 8$. Whether $m$-modular Hadamard matrices exist at all
-large orders divisible by 4 remains open for general $m$.
+New in this paper: 7-modular Hadamard matrices exist in every size divisible
+by 4. This answers a question in a 2026 survey. The same holds for $m=11$
+and $m=13$. For every other $m$, the paper shows that they exist in all large
+enough sizes, though for some $m$ only when the size is divisible by a higher
+power of 2.
 
-Most proofs use the direct-sum lemma of Lee–Szőllősi and Kuperberg. The
-contribution is the choice of designs, namely complements of projective
-geometries and Brouwer's symmetric designs, and of starting matrices.
+The matrices are built by a known method: attaching a block design to a
+smaller matrix. What is new is the choice of designs.
 
 ## What is new
 
